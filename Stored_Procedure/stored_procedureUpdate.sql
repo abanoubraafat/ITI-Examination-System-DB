@@ -1,5 +1,5 @@
 --------------------(1)Update the Branch----------------
-/*
+
 CREATE PROCEDURE UpdateBranchNames
     @OldBranchName nvarchar(50),
     @NewBranchName nvarchar(50)
@@ -28,9 +28,9 @@ select * from Branch
 EXEC UpdateBranchNames
     @OldBranchName = 'cairo',
     @NewBranchName = 'miniya';
-*/
+
 ----------------------------(2)Update the Track-----------
-/*
+
 CREATE PROCEDURE UpdateTrackNames
     @OldTrackName nvarchar(50),
     @NewTrackName nvarchar(50)
@@ -59,9 +59,9 @@ EXEC UpdateTrackNames
     @OldTrackName = '.net',
     @NewTrackName = 'c++';
 
-*/
+
 --------------------------(3)update the intake ------------
-/*
+
 CREATE PROCEDURE UpdateIntakeNames
     @OldIntakeName nvarchar(50),
     @NewIntakeName nvarchar(50)
@@ -89,9 +89,9 @@ select * from Intake
 EXEC UpdateIntakeNames
     @OldIntakeName = '44',
     @NewIntakeName = '66';
-*/
+
 -------------------------(4)UpdateCourse -------------------
-/*
+
 CREATE PROCEDURE UpdateCourse
     @OldCourseName nvarchar(50),
     @NewCourseName nvarchar(50),
@@ -132,9 +132,9 @@ EXEC UpdateCourse
     @MaxDegree = 90,
     @Description = 'THE FIRST COURSE IN FRONT END';
 SELECT * FROM Course
-*/
+
 -------------------------(5)UpdateInstractor -------------------
-/*
+
 CREATE PROCEDURE UpdateInstructor
     @InstructorID int,
     @FName nvarchar(15),
@@ -188,9 +188,9 @@ EXEC UpdateInstructor
     @LName = 'bebo',
     @Email = 'bebo88@gmail.com',
     @Password = 'Pass1234';
-*/
+
 -------------------------(6)Update Student -------------------
-/*
+
 CREATE PROCEDURE UpdateStudent
     @StudentID int,
     @FName nvarchar(15),
@@ -249,9 +249,9 @@ EXEC UpdateStudent
     @Email = 'mostafaabdella88@gmail.com',
     @Password = 'Pass123';
 
-*/
+
 -------------------------(7)Update Question -------------------
-/*
+
 CREATE PROCEDURE UpdateQuestion
     @QuestionID int,
     @QuestionType nvarchar(15),
@@ -313,5 +313,5 @@ EXEC UpdateQuestion
     @Choice2 = '',
     @Choice3 = '',
     @Choice4 = '';
-*/
+
 
