@@ -1,5 +1,5 @@
 -----------------------------(1)Delete Branch-------------
-/*
+
 CREATE PROCEDURE DeleteBranch
     @BranchName nvarchar(50)
 AS
@@ -20,9 +20,9 @@ select * from Branch
 EXEC DeleteBranch @BranchName = 'mansoura';
 select * from Branch
 EXEC DeleteBranch @BranchName = 'mansoura';
-*/
+
 ----------------------------(2)Delete Track---------------
-/*
+
 CREATE PROCEDURE DeleteTrack
     @TrackName nvarchar(50)
 AS
@@ -45,9 +45,9 @@ EXEC DeleteTrack @TrackName = 'c#';
 select * from Track
 EXEC DeleteTrack @TrackName = 'c#';
 
-*/
+
 ----------------------------(3)Delete Intake-------------
-/*
+
 CREATE PROCEDURE DeleteIntake
     @IntakeName nvarchar(50)
 AS
@@ -69,9 +69,9 @@ select * from Intake
 EXEC DeleteIntake @IntakeName = '66';
 select * from Intake
 EXEC DeleteIntake @IntakeName = '66';
-*/
+
 ----------------------------(4)Delete Course-------------
-/*
+
 CREATE PROCEDURE DeleteCourse
     @CourseName nvarchar(50)
 AS
@@ -93,9 +93,9 @@ Select * from Course
 EXEC DeleteCourse @CourseName = 'HTML';
 Select * from Course
 EXEC DeleteCourse @CourseName = 'HTML';
-*/
+
 ----------------------------(5)Delete Instractor-------------
-/*
+
 CREATE PROCEDURE DeleteInstructorByID
     @InstructorID int
 AS
@@ -117,9 +117,9 @@ SELECT * FROM Instructor
 EXEC DeleteInstructorByID @InstructorID = 1;
 EXEC DeleteInstructorByID @InstructorID = 4;
 SELECT * FROM Instructor
-*/
+
 ----------------------------(6)Delete student-------------
-/*
+
 CREATE PROCEDURE DeleteStudent
     @StudentID int
 AS
@@ -144,7 +144,7 @@ SELECT * FROM Student
 */
 
 ----------------------------(7)Delete Question-------------
-/*
+
 CREATE PROCEDURE DeleteQuestion
     @QuestionID int
 AS
@@ -166,7 +166,7 @@ SELECT * FROM Question
 EXEC DeleteQuestion @QuestionID = 4;
 EXEC DeleteQuestion @QuestionID = 1;
 
-*/
+
 
 
 
