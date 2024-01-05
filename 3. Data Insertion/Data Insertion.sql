@@ -1,6 +1,6 @@
 ------------ insert table 1  student-------------------------------
 
-INSERT INTO Students (FName,LName,GraduationYear,Email,[Password])
+INSERT INTO Student (FName,LName,GraduationYear,Email,[Password])
 VALUES('Mostafa','Abdullah','2020','Mostafa@gmail.com','AZ3456'),
       ('Abanoub','Raafat','2021','Abanoub@gmail.com','ZX5744'),
       ('Gehad','Mohamed','2022','Gehad@yahoo.com','VC6812')
@@ -8,7 +8,7 @@ VALUES('Mostafa','Abdullah','2020','Mostafa@gmail.com','AZ3456'),
 ---------------------insert table 2  Instractor--------------------------------
 
 
-INSERT INTO Instructors (FName,LName,Email,[Password])
+INSERT INTO Instructor (FName,LName,Email,[Password])
 
 VALUES ('Sara','Mohamed','Sara@gmail.com','AS0569'),
        ('Mrihan','Mohamed','mrihan@gmail.com','NB9876'),
@@ -25,7 +25,7 @@ VALUES ('Ahmed','Othman','Ahmed@gmail.com','abc00'),
 
 ----------------create table 4 Course-----------------------------------
 
-INSERT INTO Courses ([Name],Min_degree,Max_degree,[Description])
+INSERT INTO Course ([Name],MinDegree,MaxDegree,[Description])
 
 VALUES ('HTML','65','100','Learn about web page structure'),
        ('CSS','50','100','Learn about web page Style'),
@@ -65,25 +65,25 @@ VALUES ('Full stack web developer using .NET'),
 -------------------- insert table 8 exam --------------------
 
 
-INSERT INTO Exam (NumberOfQuestion ,StartTime,EndTime,TotalDegree,Corrective,Normal,Course_ID)
-VALUES (20,2024-1-10-12-00,2024-1-10-13-00,20,0,1,1),
-      (25,2024-1-11-12-00,2024-1-11-13-00,25,0,1,2),
-      (30,2024-1-12-09-00,2024-1-12-10-00,30,0,1,3),
-      (35,2024-1-13-12-00,2024-1-13-13-00,35,0,1,4)
+INSERT INTO Exam (NumberOfQuestions ,StartTime,EndTime,TotalDegree,Corrective,Normal,Course_ID)
+VALUES (20,'2024-1-7 14:30:00','2024-1-7 15:00:00',20,0,1,1),
+      (25,'2024-1-8 10:00:00','2024-1-8 11:00:00',25,0,1,2),
+      (30,'2024-1-9 11:30:00','2024-1-9 12:00:00',30,0,1,3),
+      (35,'2024-1-10 15:30:00','2024-1-10 16:00:00',35,0,1,4)
 
 -------------------- insert table 9 Question --------------------
 
 INSERT INTO Question([Type],QuestionText,CorrectAnswer,True,False,Choise_1,Choise_2,Choise_3,Choise_4)
-VALUES ('T|F','trueorfalse', 'T' , 'T' ,'F',1,2,3,4),
-        ('MCQ','multi_choice', 'Choise_1' , 'T' ,'F',1,2,3,4),
-		('Text','text', 'sql is not case sensitive' , 'T' ,'F',1,2,3,4)
+VALUES ('T/F','Is this Sql server project ?', 'T' , 1 ,0,null,null,null,null),
+        ('MCQ','What is our track', '.Net' , 0 ,0,'MERN','.Net','System Admin','Cloud')
+		--('Text','text', 'sql is not case sensitive' , 0 ,0,null,null,null,null)
 
 -------------------- insert table 10 student_Exam --------------------
 
-INSERT INTO StudentExam(Std_ID,Exam_ID,Grade ,Answer)
-VALUES (1,1,'50','T'),
-       (2,3,'60','F'),
-	   (3,3,'70','T')
+--INSERT INTO StudentExam(Std_ID,Exam_ID,Grade ,Answer)
+--VALUES (1,1,50,'T'),
+--       (2,3,60,'F'),
+--	   (3,3,70,'T')
 -------------------- insert table 11 student_Courses --------------------
 
 INSERT INTO StudentCourse(Std_ID,Course_ID)

@@ -92,7 +92,7 @@ Create Table Question
 	[Type] nvarchar(15),
 	QuestionText nvarchar(max) Not Null,
 	CorrectAnswer nvarchar(300) Not Null,
-	Ture bit not null,
+	True bit not null,
 	False bit not null,
 	Choise_1 nvarchar(30), 
 	Choise_2 nvarchar(30), 

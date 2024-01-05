@@ -33,7 +33,7 @@ LOG ON
   ( 
 	NAME='ITIExaminationSystem_log',
     FILENAME =
-       'C:\Program Files\Microsoft SQL Server\MSSQL16.MSSQLSERVER\MSSQL\DATA\DATA\MITIExaminationSystem_log.ldf',
+       'C:\Program Files\Microsoft SQL Server\MSSQL16.MSSQLSERVER\MSSQL\DATA\ITIExaminationSystem_log.ldf',
     SIZE=1MB,
     MAXSIZE=10MB,
     FILEGROWTH=100%
