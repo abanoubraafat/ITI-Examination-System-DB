@@ -1,5 +1,5 @@
 ﻿------------------- (1)addOneBranch-----------------------
-/*
+
 create procedure AddBranch
     @BranchName nvarchar(50)
 as
@@ -12,10 +12,10 @@ end;
 exec AddBranch
     @BranchName = 'branch5';
  select * from Branch
- */
+ 
 
  -------------------------------------(1)AddOneOrMoreBranch---------------------
- /*
+ 
 create proc AddOneOrMoreBranche
     @BranchNames nvarchar(MAX)
 as
@@ -64,9 +64,9 @@ END;
 --select * from  Branch
 --exec AddOneOrMoreBranche @BranchNames = 'cairo,mansoura';
 --select * from  Branch
-*/
+
 -----------------------(2)AddOneORMoreTrack-----------------
-/*
+
 CREATE PROC AddOneOrMoreTrack
     @TrackNames nvarchar(MAX)
 AS
@@ -118,10 +118,10 @@ exec AddOneOrMoreBranche @BranchNames = 'c#';
 exec AddOneOrMoreBranche @BranchNames = 'c#';
 select * from Track
 
-*/
+
 
 -------------------------(3)AddOneIntake -------------------
-/*
+
 CREATE PROCEDURE AddIntake
     @IntakeName nvarchar(50)
 AS
@@ -142,9 +142,9 @@ END;
 exec AddIntake @IntakeName  = '44';
 exec AddIntake @IntakeName  = '55';
 select * from Intake
-*/
+
 -------------------------(4)AddCourse -------------------
-/*
+
 CREATE PROCEDURE AddCourse
     @CourseName nvarchar(50),
     @MinDegree int,
@@ -183,9 +183,9 @@ select * from Course
     @MinDegree = 25,
     @MaxDegree = 70,
     @Description = 'second course in front End';
-*/
+
 -------------------------(5)AddNewInstractor -------------------
-/*
+
 CREATE PROCEDURE AddInstructor
     @FName nvarchar(15),
     @LName nvarchar(15),
@@ -238,10 +238,10 @@ EXEC AddInstructor
     @Email = 'mostafaabdella88',
     @Password = 'Pass123';
 
-*/
+
 
 -------------------------------------(6)AddNewStudent------------------------
-/*
+
 CREATE PROCEDURE AddStudent
     @FName nvarchar(15),
     @LName nvarchar(15),
@@ -298,9 +298,9 @@ EXEC AddStudent
     @Email = 'ali88@gmail',
     @Password = 'Pass123';
 
-*/
+
 -----------------------------(7)AddNewquestion--------------------------
-/*
+
 CREATE PROCEDURE AddQuestion
     @QuestionType nvarchar(15),
     @QuestionText nvarchar(max),
@@ -363,7 +363,7 @@ EXEC AddQuestion
     @Choice3 = 'js',
     @Choice4 = 'c++';
 
-	*/
+	
 
 
 
