@@ -82,7 +82,7 @@ VALUES ('T/F','Is this Sql server project ?', 'T' , 1 ,0,null,null,null,null),
 
 INSERT INTO StudentExam(Std_ID,Exam_ID ,Answer)
 VALUES (1,1,'T'),
-       (2,2,'MERN'),
+       (2,2,'MERN')
 --	   (3,3,70,'T')
 -------------------- insert table 11 student_Courses --------------------
 

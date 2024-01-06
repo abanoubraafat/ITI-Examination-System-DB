@@ -72,7 +72,7 @@ EXEC DeleteIntake @IntakeName = '66';
 
 ----------------------------(4)Delete Course-------------
 
-CREATE PROCEDURE DeleteCourse----
+CREATE PROCEDURE DeleteCourse
     @CourseName nvarchar(50)
 AS
 BEGIN

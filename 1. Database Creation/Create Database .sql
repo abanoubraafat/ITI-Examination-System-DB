@@ -11,8 +11,8 @@ ON PRIMARY
     MAXSIZE=20MB,
     FILEGROWTH=5MB
 	),
-	--mostafa 
-	--abdella
+-----gggg
+modtd
 FILEGROUP ITIExaminationSystem_FG
   (
 	NAME = 'ITIExaminationSystem_FG1',

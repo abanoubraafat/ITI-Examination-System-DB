@@ -66,55 +66,41 @@ END;
 --select * from  Branch
 
 -----------------------(2)AddOneORMoreTrack-----------------
-CREATE OR ALTER PROC AddOneOrMoreTrack
-    @TrackNames nvarchar(MAX)
+CREATE PROCEDURE AddTracks
+    @TrackNames NVARCHAR(MAX)
 AS
 BEGIN
+    
     CREATE TABLE #TempTracks
     (
-        TrackName nvarchar(50)
+        [Name] NVARCHAR(50)
     );
 
-    INSERT INTO #TempTracks (TrackName)
+    INSERT INTO #TempTracks ([Name])
     SELECT value FROM STRING_SPLIT(@TrackNames, ',');
 
-    IF EXISTS (
-        SELECT 1
-        FROM #TempTracks t
-        WHERE EXISTS (
-            SELECT 1
-            FROM Track T
-            WHERE T.Name = t.Name
-        )
-    )
+    
+    IF EXISTS (SELECT 1 FROM #TempTracks t WHERE EXISTS (SELECT 1 FROM Track WHERE [Name] = t.[Name]))
     BEGIN
-        SELECT 'The ' + t.TrackName + ' is already exist in the database' AS ResultMessage
+        SELECT DISTINCT 'Some tracks already exist in the database' AS ResultMessage
         FROM #TempTracks t
-        WHERE EXISTS (
-            SELECT 1
-            FROM Track T
-            WHERE T.Name = t.Name
-        );
+        WHERE EXISTS (SELECT 1 FROM Track WHERE [Name] = t.[Name]);
     END
     ELSE
     BEGIN
-        INSERT INTO Track (Name)
-        SELECT t.TrackName
-        FROM #TempTracks t
-        WHERE NOT EXISTS (
-            SELECT 1
-            FROM Track T
-            WHERE T.Name = t.Name
-        );
+        
+        INSERT INTO Track ([Name])
+        SELECT [Name] FROM #TempTracks;
 
         SELECT 'Tracks added successfully.' AS ResultMessage;
     END;
 
     DROP TABLE #TempTracks;
 END;
+
+
 select * from Track
-exec AddOneOrMoreTrack @TrackNames = 'c#';
-exec AddOneOrMoreTrack @TrackNames = 'c#';
+EXEC AddTracks @TrackNames = '.net';
 select * from Track
 
 
