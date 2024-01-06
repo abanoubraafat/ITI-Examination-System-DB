@@ -11,8 +11,7 @@ ON PRIMARY
     MAXSIZE=20MB,
     FILEGROWTH=5MB
 	),
------gggg
-modtd
+
 FILEGROUP ITIExaminationSystem_FG
   (
 	NAME = 'ITIExaminationSystem_FG1',
