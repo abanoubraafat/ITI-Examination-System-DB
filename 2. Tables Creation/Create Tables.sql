@@ -128,24 +128,24 @@ Constraint Student_Courses_Courses_FK Foreign Key (Course_ID)
 References Course (ID)
 )
 -------------------- create table 12 student_Courses --------------------
-Create Table StudentTrack
-(
-	Std_ID int,
-	Track_ID int,
+--Create Table StudentTrack
+--(
+--	Std_ID int,
+--	Track_ID int,
 
 
-Constraint StudentTrack_PK Primary Key (Std_ID,Track_ID),
-Constraint Student_Track_Student_FK Foreign Key (Std_ID)
-References Student(ID),
-Constraint Student_Track_Track_FK Foreign Key (Track_ID)
-References Track (ID)
-)
+--Constraint StudentTrack_PK Primary Key (Std_ID,Track_ID),
+--Constraint Student_Track_Student_FK Foreign Key (Std_ID)
+--References Student(ID),
+--Constraint Student_Track_Track_FK Foreign Key (Track_ID)
+--References Track (ID)
+--)
 -------------------- create table 13 Question_Exam --------------------
 Create Table QuestionExam
 (
 	Question_ID int,
 	Exam_ID int,
-
+	QuestionGrade int,
 
 Constraint Question_Exam_PK Primary Key (Question_ID ,Exam_ID ),
 Constraint Question_Exam_Question_FK Foreign Key (Question_ID)
@@ -153,6 +153,7 @@ References  Question(ID),
 Constraint Question_Exam_Exam_FK Foreign Key (Exam_ID)
 References Exam (ID)
 )
+--alter table QuestionExam add QuestionGrade int
 -------------------- create table 14 InstructorCourse--------------------
 Create Table InstructorCourse
 (
@@ -247,3 +248,14 @@ References Branch(ID)
 --	Constraint Intake_Track_Track_FK Foreign Key (Track_ID )
 --	References Track(id)
 --)
+
+create table Course_Question 
+(
+	Course_ID int,
+	Question_ID int,
+	Constraint Course_Question_PK Primary Key (Course_ID ,Question_ID ),
+	Constraint Course_Question_Question_FK Foreign Key (Question_ID)
+	References  Question(ID),
+	Constraint Course_Question_Course_FK Foreign Key (Course_ID)
+	References Course (ID)
+)

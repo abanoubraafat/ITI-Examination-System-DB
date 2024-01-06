@@ -62,12 +62,11 @@ begin
 END;
 --test
 --select * from  Branch
---exec AddOneOrMoreBranche @BranchNames = 'cairo,mansoura';
+--exec AddOneOrMoreBranche @BranchNames = 'cairo';
 --select * from  Branch
 
 -----------------------(2)AddOneORMoreTrack-----------------
-
-CREATE PROC AddOneOrMoreTrack
+CREATE OR ALTER PROC AddOneOrMoreTrack
     @TrackNames nvarchar(MAX)
 AS
 BEGIN
@@ -114,8 +113,8 @@ BEGIN
     DROP TABLE #TempTracks;
 END;
 select * from Track
-exec AddOneOrMoreBranche @BranchNames = 'c#';
-exec AddOneOrMoreBranche @BranchNames = 'c#';
+exec AddOneOrMoreTrack @TrackNames = 'c#';
+exec AddOneOrMoreTrack @TrackNames = 'c#';
 select * from Track
 
 
@@ -319,7 +318,7 @@ BEGIN
         WHERE QuestionText = @QuestionText
     )
     BEGIN
-        INSERT INTO Question ([Type], QuestionText, CorrectAnswer, Ture, False, Choise_1, Choise_2, Choise_3, Choise_4)
+        INSERT INTO Question ([Type], QuestionText, CorrectAnswer, True, False, Choise_1, Choise_2, Choise_3, Choise_4)
         VALUES (
             @QuestionType, 
             @QuestionText, 

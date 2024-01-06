@@ -80,9 +80,9 @@ VALUES ('T/F','Is this Sql server project ?', 'T' , 1 ,0,null,null,null,null),
 
 -------------------- insert table 10 student_Exam --------------------
 
---INSERT INTO StudentExam(Std_ID,Exam_ID,Grade ,Answer)
---VALUES (1,1,50,'T'),
---       (2,3,60,'F'),
+INSERT INTO StudentExam(Std_ID,Exam_ID ,Answer)
+VALUES (1,1,'T'),
+       (2,2,'MERN'),
 --	   (3,3,70,'T')
 -------------------- insert table 11 student_Courses --------------------
 
@@ -91,8 +91,8 @@ VALUES (1,1),(2,2)
 
 -------------------- insert table 12 student_Courses --------------------
 
-INSERT INTO StudentTrack(Std_ID,Track_ID)
-VALUES (1,1),(2,2)
+--INSERT INTO StudentTrack(Std_ID,Track_ID)
+--VALUES (1,1),(2,2)
 
 -------------------- insert table 13 Question_Exam --------------------
 

@@ -52,7 +52,7 @@ END;
 --test 
 select * from Track
 EXEC UpdateTrackNames
-    @OldTrackName = '.net',
+    @OldTrackName = 'Full stack web developer using .NET',
     @NewTrackName = 'c++';
 select * from Track
 EXEC UpdateTrackNames
@@ -242,7 +242,7 @@ EXEC UpdateStudent
     @Password = 'Pass123';
 SELECT * FROM Student
 EXEC UpdateStudent
-    @StudentID = 4, 
+    @StudentID = 5, 
     @FName = 'mostafa',
     @LName = 'abdella',
     @GraduationYear = '2021',
@@ -272,7 +272,7 @@ BEGIN
             [Type] = @QuestionType,
             QuestionText = @QuestionText,
             CorrectAnswer = @CorrectAnswer,
-            Ture = @TrueOption,
+            True = @TrueOption,
             False = @FalseOption,
             Choise_1 = @Choice1,
             Choise_2 = @Choice2,

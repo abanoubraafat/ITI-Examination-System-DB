@@ -17,7 +17,7 @@ BEGIN
     END
 END;
 select * from Branch
-EXEC DeleteBranch @BranchName = 'mansoura';
+EXEC DeleteBranch @BranchName = 'miniya';
 select * from Branch
 EXEC DeleteBranch @BranchName = 'mansoura';
 
@@ -72,7 +72,7 @@ EXEC DeleteIntake @IntakeName = '66';
 
 ----------------------------(4)Delete Course-------------
 
-CREATE PROCEDURE DeleteCourse
+CREATE PROCEDURE DeleteCourse----
     @CourseName nvarchar(50)
 AS
 BEGIN
@@ -141,7 +141,7 @@ SELECT * FROM Student
 EXEC DeleteStudent @StudentID = 1;
 EXEC DeleteStudent @StudentID = 4;
 SELECT * FROM Student
-*/
+
 
 ----------------------------(7)Delete Question-------------
 
