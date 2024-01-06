@@ -131,21 +131,23 @@ CREATE TABLE StudentCourse
         ON DELETE CASCADE
 );
 -------------------- create table 12 Question_Exam --------------------
-CREATE TABLE StudentCourse
+CREATE TABLE QuestionExam
 (
-    Std_ID INT,
-    Course_ID INT,
+    Question_ID INT,
+    Exam_ID INT,
+    QuestionGrade INT,
 
-    CONSTRAINT StudentCourses_PK PRIMARY KEY (Std_ID, Course_ID),
-    CONSTRAINT Student_Courses_Student_FK FOREIGN KEY (Std_ID)
-        REFERENCES Student(ID)
+    CONSTRAINT Question_Exam_PK PRIMARY KEY (Question_ID, Exam_ID),
+    CONSTRAINT Question_Exam_Question_FK FOREIGN KEY (Question_ID)
+        REFERENCES Question(ID)
         ON UPDATE CASCADE
         ON DELETE CASCADE,
-    CONSTRAINT Student_Courses_Courses_FK FOREIGN KEY (Course_ID)
-        REFERENCES Course(ID)
+    CONSTRAINT Question_Exam_Exam_FK FOREIGN KEY (Exam_ID)
+        REFERENCES Exam(ID)
         ON UPDATE CASCADE
         ON DELETE CASCADE
 );
+
 -------------------- create table 13 InstructorCourse--------------------
 CREATE TABLE InstructorCourse
 (
