@@ -32,32 +32,36 @@ EXEC UpdateBranchNames
 ----------------------------(2)Update the Track-----------
 
 CREATE PROCEDURE UpdateTrackNames
-    @OldTrackName nvarchar(50),
-    @NewTrackName nvarchar(50)
+    @OldTrackName NVARCHAR(50),
+    @NewTrackName NVARCHAR(50)
 AS
 BEGIN
-    IF EXISTS (SELECT 1 FROM Track WHERE Name = @OldTrackName)
+    PRINT 'Old Track Name: ' + @OldTrackName;
+    PRINT 'New Track Name: ' + @NewTrackName;
+
+    IF EXISTS (SELECT 1 FROM Track WHERE [Name] = @OldTrackName)
     BEGIN
         UPDATE Track
-        SET Name = @NewTrackName
-        WHERE Name = @OldTrackName;
+        SET [Name] = @NewTrackName
+        WHERE [Name] = @OldTrackName;
 
         SELECT 'Track updated successfully.' AS ResultMessage;
     END
     ELSE
     BEGIN
-        SELECT 'Track not found IN data base' AS ResultMessage;
+        SELECT 'Track not found IN database' AS ResultMessage;
     END
 END;
+
 --test 
 select * from Track
 EXEC UpdateTrackNames
-    @OldTrackName = 'Full stack web developer using .NET',
-    @NewTrackName = 'c++';
+    @OldTrackName = 'c++',
+    @NewTrackName = 'Full stack web developer using .NET';
 select * from Track
 EXEC UpdateTrackNames
     @OldTrackName = '.net',
-    @NewTrackName = 'c++';
+    @NewTrackName = 'kkk';
 
 
 --------------------------(3)update the intake ------------
