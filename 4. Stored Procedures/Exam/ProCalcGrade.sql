@@ -25,7 +25,7 @@ BEGIN
     SELECT @StudentMarks = COUNT(*) 
     FROM StudentExam SE
     INNER JOIN QuestionExam QE ON SE.Exam_ID = QE.Exam_ID
-	INNER JOIN Question Q ON QE.Exam_ID=Q.CorrectAnswer
+	INNER JOIN Question Q ON QE.Question_ID=Q.ID
     WHERE SE.Std_ID = @StudentID
     AND SE.Exam_ID = @ExamID
 	AND SE.Answer= Q.CorrectAnswer
@@ -33,7 +33,7 @@ BEGIN
 
     -- Calculate the grade or percentage
     DECLARE @Grade DECIMAL(5, 2)
-    SET @Grade = (@StudentMarks * 100.0) / @TotalQuestions;
+    SET @Grade = @StudentMarks;
 
     ---- Update the StudentExam table with the grade
     UPDATE StudentExam
@@ -61,7 +61,7 @@ BEGIN
 END;
 
 EXEC CalculateStudentExamGradeAndStatus_proc 1,1
-
+delete from StudentExam where Std_ID = 1
 
 EXEC CalculateStudentExamGradeAndStatus_proc 2,9
 -------------
@@ -70,7 +70,7 @@ VALUES
        (2,2,'MERN')
 INSERT INTO StudentExam(Std_ID,Exam_ID ,Answer)
 VALUES 
-       (1,3,'.Net')
+       (1,1,'T')
 
 select CorrectAnswer
 from Question
