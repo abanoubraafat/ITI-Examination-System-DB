@@ -12,6 +12,7 @@ ON PRIMARY
     FILEGROWTH=5MB
 	),
 	--mostafa 
+	--abdella
 FILEGROUP ITIExaminationSystem_FG
   (
 	NAME = 'ITIExaminationSystem_FG1',
