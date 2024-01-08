@@ -53,7 +53,7 @@ BEGIN
         TotalDegree = @TotalDegree,
         Corrective = @Corrective,
         Normal = @Normal,
-        Course_ID = @Course_ID
+        ID = @Course_ID
     WHERE ID = @ExamID
 END
 --test
