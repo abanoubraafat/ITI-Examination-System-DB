@@ -273,7 +273,6 @@ CREATE TABLE TrainngManagerManage
         ON UPDATE CASCADE
         ON DELETE CASCADE
 );
---------------------------- create table 16 CourseExam --------------------
 create table CourseExam
 (
    Course_ID int,
@@ -288,7 +287,24 @@ create table CourseExam
         ON UPDATE CASCADE
         ON DELETE CASCADE
 )
+--------------------------- create table 17 ExamQuestion --------------------
 
+CREATE TABLE ExamQuestion
+(
+	Exam_ID int,
+	Question_ID int,
+	QuestionType char(4) check (QuestionType in ('TF','MCQ','Text')),
+	QuestionGrade int,
+	CONSTRAINT ExamQuestion_PK PRIMARY KEY (Exam_ID, Question_ID),
+	CONSTRAINT ExamQuestion_Question_FK FOREIGN KEY (Question_ID)
+		REFERENCES Question (Questions_ID)
+		ON UPDATE CASCADE
+		ON DELETE CASCADE,
+	CONSTRAINT ExamQuestion_Exam_FK FOREIGN KEY (Exam_ID)
+		REFERENCES Exam (ID)
+		ON UPDATE CASCADE
+		ON DELETE CASCADE
+);
 
 
 
