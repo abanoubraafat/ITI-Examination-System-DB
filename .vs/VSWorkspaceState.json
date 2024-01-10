@@ -1,0 +1,16 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\2-Table Creation",
+    "\\4-Stored Procedure",
+    "\\4-Stored Procedure\\TrainingManager",
+    "\\4-Stored Procedure\\TrainingManager\\Branch",
+    "\\4-Stored Procedure\\TrainingManager\\Course",
+    "\\4-Stored Procedure\\TrainingManager\\Instructor",
+    "\\4-Stored Procedure\\TrainingManager\\InTake",
+    "\\4-Stored Procedure\\TrainingManager\\Question",
+    "\\4-Stored Procedure\\TrainingManager\\Track"
+  ],
+  "SelectedNode": "\\4-Stored Procedure\\TrainingManager\\Track\\AddOrUpdateOrDeleteTrack.sql",
+  "PreviewInSolutionExplorer": false
+}

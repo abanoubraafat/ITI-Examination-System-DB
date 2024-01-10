@@ -66,8 +66,6 @@ VALUES (1,10,'2024-1-7 14:30:00','2024-1-7 15:00:00',60,0,1),
       (2,10,'2024-1-8 10:00:00','2024-1-8 11:00:00',60,0,1),
       (3,10,'2024-1-9 11:30:00','2024-1-9 12:00:00',60,0,1),
       (4,10,'2024-1-10 15:30:00','2024-1-10 16:00:00',60,0,1)
-
-
 -------------------- insert table 9 Question --------------------
 INSERT [dbo].[Question] (Questions_ID, [Degree], [Text_Questions], [Correct_Answer_Text_Questions], [True_or_False_Questions], [Correct_Answer_True_or_False], [Choose_An_Answer_Question], [Correct_Answer_Choose_Question], [Course_Id])values
  (1, 10, N'Describe Database.', N'Collection of tables.', N'Is C# purly OOP?', 0, N'The first true object oriented language is: a) C++. b) SmallTalk. c) C#.', N'b', 1),
