@@ -122,7 +122,6 @@ CREATE TABLE Exam
 CREATE TABLE Question
 (
     [Questions_ID] INT ,
-    [Degree] INT NOT NULL,
     [Text_Questions] NVARCHAR(MAX) NULL,
     [Correct_Answer_Text_Questions] NVARCHAR(MAX) NULL,
     [True_or_False_Questions] NVARCHAR(MAX) NULL,
@@ -134,7 +133,6 @@ CREATE TABLE Question
     CONSTRAINT Question_PK PRIMARY KEY (Questions_ID),
     CONSTRAINT fk_Course FOREIGN KEY (Course_Id) REFERENCES dbo.Course(ID)
 );
-
 
 -------------------- create table 10 student_Exam_Question --------------------
 CREATE TABLE StudentExamQuestions
@@ -287,7 +285,7 @@ create table CourseExam
         ON UPDATE CASCADE
         ON DELETE CASCADE
 )
---------------------------- create table 17 ExamQuestion --------------------
+--------------------------- create table 16 ExamQuestion --------------------
 
 CREATE TABLE ExamQuestion
 (
@@ -305,8 +303,22 @@ CREATE TABLE ExamQuestion
 		ON UPDATE CASCADE
 		ON DELETE CASCADE
 );
+--------------------------- create table 17 StudentExam --------------------
 
-
+create table StudentExam
+(
+	Student_ID int,
+	Exam_ID int,
+	CONSTRAINT StudentExamT_PK PRIMARY KEY (Student_ID, Exam_ID),
+	CONSTRAINT StudentExam_Student_FK FOREIGN KEY (Student_ID)
+		REFERENCES Question (Questions_ID)
+		ON UPDATE CASCADE
+		ON DELETE CASCADE,
+	CONSTRAINT ExamQuestionT_Exam_FK FOREIGN KEY (Exam_ID)
+		REFERENCES Exam (ID)
+		ON UPDATE CASCADE
+		ON DELETE CASCADE
+);
 
 
 

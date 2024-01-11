@@ -63,16 +63,22 @@ BEGIN
 
         WHILE @@FETCH_STATUS = 0
         BEGIN
+            -- Fetch question grade from ExamQuestion table
+            DECLARE @questionGrade INT
+            SELECT @questionGrade = QuestionGrade
+            FROM ExamQuestion
+            WHERE Exam_ID = @exam_id AND Question_ID = @questionId
+
             -- Your logic for calculating the score goes here
-            -- Example: Accumulate scores for each question
+            -- Example: Accumulate scores for each question and add the question grade
             IF @textAnswer IS NOT NULL AND (@textAnswer LIKE '%' + @correctTextAnswer + '%' OR @textAnswer LIKE '%[^a-zA-Z]'+ @correctTextAnswer + '[^a-zA-Z]%')
-                SET @questionsResult = @questionsResult + 10
+                SET @questionsResult = @questionsResult + @questionGrade
             ELSE IF @chooseAnswer IS NOT NULL AND @chooseAnswer = @correctChooseAnswer
-                SET @questionsResult = @questionsResult + 10
+                SET @questionsResult = @questionsResult +  @questionGrade
             ELSE IF @trueFalseAnswer IS NOT NULL AND @trueFalseAnswer = @correctTrueFalseAnswer
-                SET @questionsResult = @questionsResult + 10
+                SET @questionsResult = @questionsResult + @questionGrade
             ELSE
-                SET @questionsResult = 0 -- Set a default score if none of the conditions match
+                SET @questionsResult = 0 -- Set the question grade if none of the conditions match
 
             -- Update the question result
             UPDATE StudentExamQuestions SET Questions_result = @questionsResult 
@@ -88,10 +94,9 @@ BEGIN
         DROP TABLE #tmpExamResults
 	END
 END
-
-EXEC CorrectExamForStudent 1, 1
+EXEC CorrectExamForStudent 2,32
 select * from StudentExamQuestions
-where Std_ID=1 and Exam_ID=1
+where Std_ID=2 and Exam_ID=32
 --0
 --10
 --10
