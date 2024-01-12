@@ -101,9 +101,7 @@ BEGIN
         DROP TABLE #tmpExamResults
 	END
 END
-EXEC CorrectExamForStudent 'instructor', 'instructor', 2,32
-select * from StudentExamQuestions
-where Std_ID=2 and Exam_ID=32
+
 --0
 --10
 --10

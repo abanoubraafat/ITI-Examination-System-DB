@@ -22,11 +22,7 @@ BEGIN
         SELECT 'Intake name already exists in the database.' AS ResultMessage;
     END
 END;
-
---select * from Intake
-exec AddIntake 'manager', 'manager',  @IntakeName  = '44';
-exec AddIntake 'manager', 'manager',  @IntakeName  = '55';
-select * from Intake
+GO
 
 --------------------------update the intake ------------
 
@@ -55,17 +51,8 @@ BEGIN
         SELECT 'Intake not found IN data base' AS ResultMessage;
     END
 END;
---test 
-select * from Intake
-EXEC UpdateIntakeNames
-'manager', 'manager', 
-    @OldIntakeName = '44',
-    @NewIntakeName = '66';
-select * from Intake
-EXEC UpdateIntakeNames
-'manager', 'manager', 
-    @OldIntakeName = '44',
-    @NewIntakeName = '66';
+GO
+
 
 ----------------------------Delete Intake-------------
 
@@ -92,6 +79,4 @@ BEGIN
         SELECT 'Intake not found In data base' AS ResultMessage;
     END
 END;
---test 
-select * from Intake
-EXEC DeleteIntake 'manager', 'manager',  @IntakeID = '5';
+Go

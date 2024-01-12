@@ -59,11 +59,9 @@ BEGIN
         SELECT ERROR_MESSAGE() AS ErrorMessage;
     END CATCH;
 END;
+Go
 
 
-exec AddTracks  'manager', 'manager',  @TrackNames = 'jjjj';
-exec AddTracks 'manager', 'manager',  @TrackNames = 'C#';
-select * from Track
 
 ----------------------------Update the Track-----------
 
@@ -92,17 +90,8 @@ BEGIN
         SELECT 'Track not found IN data base' AS ResultMessage;
     END
 END;
---test 
-select * from Track
-EXEC UpdateTrackNames
- 'manager', 'manager', 
-    @OldTrackName = 'jjjj',
-    @NewTrackName = 'c++';
-select * from Track
-EXEC UpdateTrackNames
- 'manager', 'manager', 
-    @OldTrackName = '.net',
-    @NewTrackName = 'c++';
+Go
+
 
 ----------------------------Delete Track---------------
 
@@ -129,7 +118,4 @@ IF not (@Username = 'manager' and @Password = 'manager')
         SELECT 'Track not found In data base' AS ResultMessage;
     END
 END;
---test 
-select * from Track
-EXEC DeleteTrack  'manager', 'manager',  @TrackID = 8;
-select * from Track
+Go

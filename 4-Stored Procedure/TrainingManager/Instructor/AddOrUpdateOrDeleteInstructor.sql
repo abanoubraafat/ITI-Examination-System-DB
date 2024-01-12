@@ -41,28 +41,9 @@ BEGIN
         SELECT 'Instructor with the same email already exists IN DATA BASE' AS ResultMessage;
     END
 END;
---test
-SELECT * FROM Instructor
-EXEC AddInstructor
- 'manager', 'manager', 
-    @FName = 'mostafa',
-    @LName = 'abdella',
-    @Email = 'mostafaabdella88@gmail.com',
-    @Password = 'Pass123t';
-SELECT * FROM Instructor
-EXEC AddInstructor
- 'manager', 'manager', 
-    @FName = 'mostafa',
-    @LName = 'abdella',
-    @Email = 'mostafaabdella88@gmal.com',
-    @Password = 'Pass123';
-------with incorrect pass or email---------
-EXEC AddInstructor
- 'manager', 'manager', 
-    @FName = 'mostafa',
-    @LName = 'abdella',
-    @Email = 'mostafaabdella88',
-    @Password = 'Pass123';
+GO
+
+
 
 
 -------------------------UpdateInstructor -------------------
@@ -114,23 +95,8 @@ BEGIN
         SELECT 'Instructor not found In database' AS ResultMessage;
     END
 END;
--- Test 
-SELECT * FROM Instructor
-EXEC UpdateInstructor
- 'manager', 'manager', 
-    @InstructorID = 1, 
-    @FName = 'abounob',
-    @LName = 'bebo',
-    @Email = 'bebo88@gmail.com',
-    @Password = 'Pass1234';
-SELECT * FROM Instructor
-EXEC UpdateInstructor
- 'manager', 'manager', 
-    @InstructorID = 8 , 
-    @FName = 'abounob',
-    @LName = 'bebo',
-    @Email = 'bebo88@gmail.com',
-    @Password = 'Pass1234';
+GO
+
 
 ----------------------------Delete Instructor-------------
 
@@ -157,6 +123,4 @@ BEGIN
         SELECT 'Instructor not found IN data base' AS ResultMessage;
     END
 END;
---test 
-SELECT * FROM Instructor
-EXEC DeleteInstructorByID  'manager', 'manager',  @InstructorID = 8;
+GO

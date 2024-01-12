@@ -44,27 +44,8 @@ BEGIN
         SELECT 'Student with the same email already exists IN database' AS ResultMessage;
     END
 END;
---test
-SELECT * from Student
-EXEC AddStudent
- 'manager', 'manager', 
-    @ID=7,
-    @FName = 'ali',
-    @LName = 'abdella',
-    @GraduationYear = '2020',
-    @Email = 'ali88@gmail.com',
-    @Password = 'Pass123Y';
-SELECT * from Student
+GO
 
---------------- Incorrect pass or email------------------ 
-EXEC AddStudent
- 'manager', 'manager', 
-	@ID=8,
-    @FName = 'ali',
-    @LName = 'abdella',
-    @GraduationYear = '2020',
-    @Email = 'ali88@gmail',
-    @Password = 'Pass123F';
 
 -------------------------Update Student -------------------
 
@@ -117,17 +98,8 @@ BEGIN
         SELECT 'Student not found In data base' AS ResultMessage;
     END
 END;
---test
-SELECT * FROM Student
-EXEC UpdateStudent
- 'manager', 'manager', 
-    @StudentID = 8, 
-    @FName = 'mostafa',
-    @LName = 'abdella',
-    @GraduationYear = '2021',
-    @Email = 'mostafaabdella88@gmail.com',
-    @Password = 'Pass123H';
-SELECT * FROM Student
+GO
+
 
 ----------------------------Delete student-------------
 
@@ -154,6 +126,4 @@ BEGIN
         SELECT 'Student not found In database' AS ResultMessage;
     END
 END;
---test
-SELECT * FROM Student
-EXEC DeleteStudent 'manager', 'manager',  @StudentID = 7;
+Go

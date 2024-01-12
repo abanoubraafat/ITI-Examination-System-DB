@@ -27,31 +27,7 @@ BEGIN
         SELECT 'The course ' + @CourseName + ' is already exist in the database' AS ResultMessage;
     END
 END;
---test
-select * from Course
-EXEC AddCourse
- 'manager', 'manager', 
-	@ID=6,
-    @CourseName = 'js',
-    @MinDegree = 25,
-    @MaxDegree = 70,
-    @Description = 'third course in front End';
-select * from Course
-EXEC AddCourse
- 'manager', 'manager', 
- 	@ID=7,
-    @CourseName = 'css',
-    @MinDegree = 25,
-    @MaxDegree = 70,
-    @Description = 'second course in front End';
-select * from Course
-	EXEC AddCourse
- 'manager', 'manager', 
- 	@ID=7,
-    @CourseName = 'css',
-    @MinDegree = 25,
-    @MaxDegree = 70,
-    @Description = 'second course in front End';
+Go
 
 -------------------------UpdateCourse -------------------
 
@@ -83,16 +59,8 @@ BEGIN
         SELECT 'Course not found IN DATA BASE' AS ResultMessage;
     END
 END;
---test
-SELECT * FROM Course
-EXEC UpdateCourse
-    @OldID = 2,
-	@NEWID=3,
-    @NewCourseName = 'HTML',
-    @MinDegree = 10,
-    @MaxDegree = 90,
-    @Description = 'THE FIRST COURSE IN FRONT END';
-SELECT * FROM Course
+Go
+
 
 ----------------------------Delete Course-------------
 
@@ -119,6 +87,4 @@ BEGIN
         SELECT 'Course not found iN data base' AS ResultMessage;
     END
 END;
---test
-Select * from Course
-EXEC DeleteCourse 'manager', 'manager',  @CourseID= 6;
+Go

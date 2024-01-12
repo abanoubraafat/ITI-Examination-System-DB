@@ -51,10 +51,8 @@ begin
     END;
     DROP TABLE #TempBranches;
 END;
---test
-select * from  Branch
-exec AddOneOrMoreBranche 'manager', 'manager',  @BranchNames = 'Sohag';
-select * from  Branch
+Go
+
 
 
 --------------------Update the Branch----------------
@@ -84,18 +82,10 @@ BEGIN
         SELECT 'Branch not found IN data base' AS ResultMessage;
     END
 END;
+Go
 
---test
-select * from Branch
-EXEC UpdateBranchNames
-'manager', 'manager', 
-    @OldBranchName = 'cairo',
-    @NewBranchName = 'miniya';
-select * from Branch
-EXEC UpdateBranchNames
-'manager', 'manager', 
-    @OldBranchName = 'cairo',
-    @NewBranchName = 'miniya';
+
+	
 
 -----------------------------Delete Branch-------------
 
@@ -122,6 +112,4 @@ BEGIN
         SELECT 'Branch not found In data base' AS ResultMessage;
     END
 END;
-select * from Branch
-EXEC DeleteBranch 'manager', 'manager',  @BranchID = 7;
-select * from Branch
+Go

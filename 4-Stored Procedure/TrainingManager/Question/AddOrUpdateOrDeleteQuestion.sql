@@ -43,19 +43,9 @@ BEGIN
     END CATCH;
 END;
 
---test 
-SELECT * FROM Question
-EXEC AddQuestion
- 'manager', 'manager', 
-	@Questions_ID=7,
-    @Text_Questions ='what is the first course in Fornt End',
-    @Correct_Answer_Text_Questions ='html',
-    @True_or_False_Questions  ='js is 3 course',
-    @Correct_Answer_True_or_False =1,
-    @Choose_An_Answer_Question ='a or b',
-    @Correct_Answer_Choose_Question ='a',
-    @Course_Id  =4
-SELECT * FROM Question
+GO
+
+
 -------------------------Update Question -------------------
 
 CREATE OR ALTER PROC UpdateQuestion
@@ -102,20 +92,9 @@ BEGIN
         SELECT ERROR_MESSAGE() AS ErrorMessage;
     END CATCH;
 END;
+Go
 
---test 
-SELECT * FROM Question
-EXEC UpdateQuestion
- 'manager', 'manager', 
-	@Questions_ID=6,
-    @Text_Questions ='what is the first course in Fornt End',
-    @Correct_Answer_Text_Questions ='html',
-    @True_or_False_Questions  ='js is 3 course',
-    @Correct_Answer_True_or_False =1,
-    @Choose_An_Answer_Question ='a or b',
-    @Correct_Answer_Choose_Question ='a',
-    @Course_Id  =4
-SELECT * FROM Question
+
 ----------------------------Delete Question-------------
 
 CREATE OR ALTER PROCEDURE DeleteQuestion
@@ -141,6 +120,4 @@ BEGIN
         SELECT 'Question not found IN data base' AS ResultMessage;
     END
 END;
---test
-SELECT * FROM Question
-EXEC DeleteQuestion  'manager', 'manager',  @QuestionID = 7;
+Go
