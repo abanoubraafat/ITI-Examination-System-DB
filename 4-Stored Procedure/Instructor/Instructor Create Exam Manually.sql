@@ -1,15 +1,22 @@
 --Instructor select questions for the exam manually
 --1- give the exam specs
 create or alter proc SetManualQuestionsCourseExam_Proc 
+	@Username varchar(10),
+	@Password varchar(10),	
 	@Instructor_ID int,
 	@Course_ID int,
-    @StartTime DATE,
-    @EndTime DATE,
+    @StartTime DATETIME,
+    @EndTime DATETIME,
     @Corrective BIT,
     @Normal BIT
 as
 begin
-	 IF @Instructor_ID <= 0 or @Course_ID <= 0 or @Instructor_ID is null or @Course_ID is null or @Corrective is null or @Normal is null
+	IF not(@Username = 'instructor' and @Password = 'instructor')
+	begin
+		SELECT 'Access Denied' AS ResultMessage
+		RETURN
+	end
+	 ELSE IF @Instructor_ID <= 0 or @Course_ID <= 0 or @Instructor_ID is null or @Course_ID is null or @Corrective is null or @Normal is null
 		BEGIN
 			SELECT 'Invalid input.' AS ResultMessage
 			RETURN
@@ -51,27 +58,44 @@ begin
 			--select @NewExam_ID
 			 INSERT INTO Exam (ID,NumberOfQuestions, StartTime, EndTime, TotalDegree, Corrective, Normal)
 				VALUES (@NewExam_ID ,0, @StartTime, @EndTime, 0, @Corrective, @Normal)
+				
 				INSERT INTO CourseExam VALUES(@Course_ID, @NewExam_ID)
+			
+			insert into StudentExam(Exam_ID, Student_ID) 
+			select ce.Exam_ID ,sc.Std_ID from StudentCourse sc
+			inner join CourseExam ce
+			on ce.Course_ID = sc.Course_ID
+			
+			where sc.Course_ID = @Course_ID and ce.Exam_ID = @NewExam_ID
 			SELECT cast(@NewExam_ID as varchar(max)) + ' is the Exam number you can add questions with.' AS ResultMessage 
 end
 --test
 select * from ExamQuestion
  delete from ExamQuestion
 exec SetManualQuestionsCourseExam_Proc 
+	'instructor',
+	'instructor',
 	2,
 	2,
-    '2024-1-11 14:30:00','2024-1-11 15:00:00',
+    '2024-1-13 14:30:00','2024-1-14 15:00:00',
    0,
    1
    select * from ExamQuestion
-
+   select * from StudentExam where Exam_ID = 39
 --2- show questions available for that exam (that belongs to a specific course)
 create or alter proc ShowQuestionPoolForInstructorCourse
+			@Username varchar(10),
+			@Password varchar(10),	
 			@Instructor_ID int,
 			@Course_ID int
 as
 begin
-	 IF @Instructor_ID <= 0 or @Course_ID <= 0 or @Instructor_ID is null or @Course_ID is null
+	IF not(@Username = 'instructor' and @Password = 'instructor')
+	begin
+		SELECT 'Access Denied' AS ResultMessage
+		RETURN
+	end
+	ELSE IF @Instructor_ID <= 0 or @Course_ID <= 0 or @Instructor_ID is null or @Course_ID is null
 		BEGIN
 			SELECT 'Invalid input.' AS ResultMessage
 			RETURN
@@ -103,10 +127,14 @@ begin
 			from Question where Course_Id = @Course_ID
 end
 --test
- exec ShowQuestionPoolForInstructorCourse 2,2
+ exec ShowQuestionPoolForInstructorCourse
+				'instructor',
+				'instructor', 2,2
 --3- add questions to the pre created exam in step 1 from pool displayed in step 2 
 ------------------------------------------
  create or alter proc AddQuestionToExamManually_Proc
+ 				@Username varchar(10),
+				@Password varchar(10),	
 				@Instructor_ID int,
 				@Exam_ID int,
 				@Question_ID int,
@@ -114,7 +142,12 @@ end
 				@Question_Grade int
 as
 begin
-	IF @Instructor_ID <= 0 or @Exam_ID <= 0 or @Question_ID <= 0 or @Question_Grade <= 0 or @Instructor_ID <= 0 or @Exam_ID is null or @Question_ID is null or @Question_Grade is null or @Question_Type is null
+	IF not(@Username = 'instructor' and @Password = 'instructor')
+	begin
+		SELECT 'Access Denied' AS ResultMessage
+		RETURN
+	end
+	ELSE IF @Instructor_ID <= 0 or @Exam_ID <= 0 or @Question_ID <= 0 or @Question_Grade <= 0 or @Instructor_ID <= 0 or @Exam_ID is null or @Question_ID is null or @Question_Grade is null or @Question_Type is null
 		BEGIN
 			SELECT 'Invalid input.' AS ResultMessage
 			RETURN
@@ -198,8 +231,10 @@ begin
 end
    select * from Exam where ID = 19
 exec AddQuestionToExamManually_Proc
+				'instructor',
+				'instructor',
 				2,
-				18,
+				40,
 				4,
 				'TF',
 				10

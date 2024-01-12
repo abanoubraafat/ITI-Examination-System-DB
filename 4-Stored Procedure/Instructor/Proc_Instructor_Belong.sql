@@ -1,12 +1,19 @@
 CREATE OR ALTER PROCEDURE AddInstructorBelong
+	@Username varchar(10),
+	@Password varchar(10),
     @Ins_ID INT,
     @Intake_ID INT,
     @Track_ID INT,
     @Branch_ID INT
 AS
 BEGIN
+	IF not (@Username = 'manager' and @Password = 'manager')
+	begin
+		SELECT 'Access Denied' AS ResultMessage
+		RETURN
+	end
     -- Check if Ins_ID exists in Instructor table
-    IF NOT EXISTS (SELECT 1 FROM Instructor WHERE ID = @Ins_ID)
+    ELSE IF NOT EXISTS (SELECT 1 FROM Instructor WHERE ID = @Ins_ID)
     BEGIN
         SELECT 'Instructor not found in DB' AS ResultMessage;
         RETURN;
@@ -49,26 +56,33 @@ BEGIN
     END
 	END
 select * from InstructorBelong
-EXEC AddInstructorBelong @Ins_ID = 4, @Intake_ID = 1, @Track_ID = 1, @Branch_ID = 1;
+EXEC AddInstructorBelong 'manager', 'manager', @Ins_ID = 4, @Intake_ID = 1, @Track_ID = 1, @Branch_ID = 1;
 
-EXEC AddInstructorBelong @Ins_ID = 7, @Intake_ID = 3, @Track_ID = 4, @Branch_ID = 8;
+EXEC AddInstructorBelong 'manager', 'manager', @Ins_ID = 7, @Intake_ID = 3, @Track_ID = 4, @Branch_ID = 8;
 
-EXEC AddInstructorBelong @Ins_ID = 4, @Intake_ID = 5, @Track_ID = 1, @Branch_ID = 1;
+EXEC AddInstructorBelong 'manager', 'manager', @Ins_ID = 4, @Intake_ID = 5, @Track_ID = 1, @Branch_ID = 1;
 
-EXEC AddInstructorBelong @Ins_ID = 4, @Intake_ID = 3, @Track_ID = 8, @Branch_ID = 1;
+EXEC AddInstructorBelong 'manager', 'manager', @Ins_ID = 4, @Intake_ID = 3, @Track_ID = 8, @Branch_ID = 1;
 
-EXEC AddInstructorBelong @Ins_ID = 4, @Intake_ID = 3, @Track_ID = 4, @Branch_ID = 8;
+EXEC AddInstructorBelong 'manager', 'manager', @Ins_ID = 4, @Intake_ID = 3, @Track_ID = 4, @Branch_ID = 8;
 
 -------------------------------------Update_Instractor_Branch_Intake_Track------------------------------------------
 CREATE OR ALTER PROCEDURE UpdateInstractorBelong
+	@Username varchar(10),
+	@Password varchar(10),
     @Ins_ID INT,
     @NewIntake_ID INT,
     @NewTrack_ID INT,
     @NewBranch_ID INT
 AS
 BEGIN
+	IF not (@Username = 'manager' and @Password = 'manager')
+	begin
+		SELECT 'Access Denied' AS ResultMessage
+		RETURN
+	end		
     -- Check if  Ins_ID  exists in InstructorBelongtable
-    IF NOT EXISTS (SELECT 1 FROM InstructorBelong WHERE Ins_ID = @Ins_ID)
+    ELSE IF NOT EXISTS (SELECT 1 FROM InstructorBelong WHERE Ins_ID = @Ins_ID)
     BEGIN
         SELECT 'Instractor not found in DB' AS ResultMessage;
         RETURN;
@@ -85,18 +99,25 @@ BEGIN
 END
 
 select * from InstructorBelong
-EXEC UpdateInstractorBelong @Ins_ID = 1, @NewIntake_ID = 2, @NewTrack_ID = 3, @NewBranch_ID = 4;
+EXEC UpdateInstractorBelong 'manager', 'manager', @Ins_ID = 1, @NewIntake_ID = 2, @NewTrack_ID = 3, @NewBranch_ID = 4;
 
-EXEC UpdateInstractorBelong @Ins_ID = 6, @NewIntake_ID = 2, @NewTrack_ID = 3, @NewBranch_ID = 4;
+EXEC UpdateInstractorBelong 'manager', 'manager', @Ins_ID = 6, @NewIntake_ID = 2, @NewTrack_ID = 3, @NewBranch_ID = 4;
 
 
 -------------------------------------Delete_Instractor_Branch_Intake_Track------------------------------
 CREATE OR ALTER PROCEDURE DeleteInstructorBelong
+	@Username varchar(10),
+	@Password varchar(10),
     @Ins_ID INT
 AS
 BEGIN
+	IF not (@Username = 'manager' and @Password = 'manager')
+	begin
+		SELECT 'Access Denied' AS ResultMessage
+		RETURN
+	end
     -- Check if Std_ID exists in InstructorBelong table
-    IF NOT EXISTS (SELECT 1 FROM InstructorBelong WHERE Ins_ID = @Ins_ID)
+    ELSE IF NOT EXISTS (SELECT 1 FROM InstructorBelong WHERE Ins_ID = @Ins_ID)
     BEGIN
         SELECT 'Instractor not found in InstructorBelong' AS ResultMessage;
         RETURN;
@@ -109,8 +130,8 @@ BEGIN
     SELECT 'Instructor Belong deleted successfully.' AS ResultMessage;
 END
 select * from InstructorBelong
-EXEC DeleteInstructorBelong @Ins_ID = 4;
+EXEC DeleteInstructorBelong 'manager', 'manager', @Ins_ID = 4;
 
-EXEC DeleteInstructorBelong @Ins_ID = 5;
+EXEC DeleteInstructorBelong 'manager', 'manager', @Ins_ID = 5;
 
 

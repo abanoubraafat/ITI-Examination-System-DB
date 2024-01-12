@@ -1,0 +1,13 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\4-Stored Procedure",
+    "\\4-Stored Procedure\\TrainingManager",
+    "\\4-Stored Procedure\\TrainingManager\\Branch",
+    "\\4-Stored Procedure\\TrainingManager\\Course",
+    "\\4-Stored Procedure\\TrainingManager\\Student",
+    "\\6-Users & Permissions"
+  ],
+  "SelectedNode": "\\4-Stored Procedure\\TrainingManager\\Course\\AddOrUpdateOrDeleteCourse.sql",
+  "PreviewInSolutionExplorer": false
+}

@@ -1,12 +1,19 @@
 --Edit Question Grade
 create or alter proc EditGradeOfQuestion_Proc
+				@Username varchar(10),
+				@Password varchar(10),
 				@Instructor_ID int,
 				@Exam_ID int,
 				@Question_ID int,
 				@Question_Grade int
 as
 begin
-	IF @Instructor_ID <= 0 or @Exam_ID <= 0 or @Question_ID <= 0 or @Question_Grade <= 0 or @Instructor_ID is null or @Exam_ID is null or @Question_ID is null or @Question_Grade is null
+	IF not(@Username = 'instructor' and @Password = 'instructor') 
+	begin
+		SELECT 'Access Denied' AS ResultMessage
+		RETURN
+	end
+	ELSE IF @Instructor_ID <= 0 or @Exam_ID <= 0 or @Question_ID <= 0 or @Question_Grade <= 0 or @Instructor_ID is null or @Exam_ID is null or @Question_ID is null or @Question_Grade is null
 		BEGIN
 			SELECT 'Invalid input.' AS ResultMessage
 			RETURN
@@ -87,6 +94,8 @@ begin
 end
 select * from ExamQuestion
 exec EditGradeOfQuestion_Proc
+		'instructor',
+		'instructor',
 				2,
 				18,
 				1,
@@ -96,12 +105,19 @@ select * from Exam where ID = 18
 --delete question
 
 create or alter proc DeleteQuestion_Proc
+				@Username varchar(10),
+				@Password varchar(10),
 				@Instructor_ID int,
 				@Exam_ID int,
 				@Question_ID int
 as
 begin
-	IF @Instructor_ID <= 0 or @Exam_ID <= 0 or @Question_ID <= 0 or @Instructor_ID is null or @Exam_ID is null or @Question_ID is null
+	IF not(@Username = 'instructor' and @Password = 'instructor')
+	begin
+		SELECT 'Access Denied' AS ResultMessage
+		RETURN
+	end
+	ELSE IF @Instructor_ID <= 0 or @Exam_ID <= 0 or @Question_ID <= 0 or @Instructor_ID is null or @Exam_ID is null or @Question_ID is null
 		BEGIN
 			SELECT 'Invalid input.' AS ResultMessage
 			RETURN
@@ -167,6 +183,8 @@ begin
 end
 
 exec DeleteQuestion_Proc
+		'instructor',
+		'instructor',
 				2,
 				18,
 				3
@@ -176,12 +194,19 @@ select * from Exam where ID = 18
 --------------------------------------------------------------------------------------------
 --Delete Exam --Alpha
 create or alter proc DeleteCourseExam_Proc 
+	@Username varchar(10),
+	@Password varchar(10),
 	@Instructor_ID int,
 	@Course_ID int,
 	@Exam_ID int
 as
 begin
-	 IF @Instructor_ID <= 0 or @Course_ID <= 0 or @Exam_ID <= 0 or @Instructor_ID is null or @Course_ID is null or @Exam_ID is null 
+	IF not(@Username = 'instructor' and @Password = 'instructor')
+	begin
+		SELECT 'Access Denied' AS ResultMessage
+		RETURN
+	end
+	ELSE IF @Instructor_ID <= 0 or @Course_ID <= 0 or @Exam_ID <= 0 or @Instructor_ID is null or @Course_ID is null or @Exam_ID is null 
 		BEGIN
 			SELECT 'Invalid input.' AS ResultMessage
 			RETURN
@@ -229,6 +254,8 @@ begin
 end
 
 exec DeleteCourseExam_Proc 
+	'instructor',
+	'instructor',
 	1 ,
 	1 ,
 	1

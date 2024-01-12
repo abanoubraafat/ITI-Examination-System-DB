@@ -1,8 +1,15 @@
 -----------------------AddOneORMoreTrack---------------
 CREATE OR ALTER PROC AddTracks
+	@Username varchar(10),
+	@Password varchar(10),	
     @TrackNames NVARCHAR(MAX)
 AS
 BEGIN
+	IF not (@Username = 'manager' and @Password = 'manager')
+	begin
+		SELECT 'Access Denied' AS ResultMessage
+		RETURN
+	end
     BEGIN TRY
         CREATE TABLE #TempTracks
         (
@@ -54,18 +61,25 @@ BEGIN
 END;
 
 
-exec AddTracks  @TrackNames = 'jjjj';
-exec AddTracks @TrackNames = 'C#';
+exec AddTracks  'manager', 'manager',  @TrackNames = 'jjjj';
+exec AddTracks 'manager', 'manager',  @TrackNames = 'C#';
 select * from Track
 
 ----------------------------Update the Track-----------
 
-CREATE PROCEDURE UpdateTrackNames
+CREATE OR ALTER PROCEDURE UpdateTrackNames
+	@Username varchar(10),
+	@Password varchar(10),	
     @OldTrackName nvarchar(50),
     @NewTrackName nvarchar(50)
 AS
 BEGIN
-    IF EXISTS (SELECT 1 FROM Track WHERE Name = @OldTrackName)
+	IF not (@Username = 'manager' and @Password = 'manager')
+	begin
+		SELECT 'Access Denied' AS ResultMessage
+		RETURN
+	end
+    ELSE IF EXISTS (SELECT 1 FROM Track WHERE Name = @OldTrackName)
     BEGIN
         UPDATE Track
         SET Name = @NewTrackName
@@ -81,20 +95,29 @@ END;
 --test 
 select * from Track
 EXEC UpdateTrackNames
+ 'manager', 'manager', 
     @OldTrackName = 'jjjj',
     @NewTrackName = 'c++';
 select * from Track
 EXEC UpdateTrackNames
+ 'manager', 'manager', 
     @OldTrackName = '.net',
     @NewTrackName = 'c++';
 
 ----------------------------Delete Track---------------
 
-CREATE PROCEDURE DeleteTrack
+CREATE OR ALTER PROCEDURE DeleteTrack
+	@Username varchar(10),
+	@Password varchar(10),	
     @TrackID nvarchar(50)
 AS
 BEGIN
-    IF EXISTS (SELECT 1 FROM Track WHERE ID = @TrackID)
+IF not (@Username = 'manager' and @Password = 'manager')
+	begin
+		SELECT 'Access Denied' AS ResultMessage
+		RETURN
+	end
+    ELSE IF EXISTS (SELECT 1 FROM Track WHERE ID = @TrackID)
     BEGIN
         DELETE FROM Track
         WHERE ID = @TrackID;
@@ -108,5 +131,5 @@ BEGIN
 END;
 --test 
 select * from Track
-EXEC DeleteTrack @TrackID = 8;
+EXEC DeleteTrack  'manager', 'manager',  @TrackID = 8;
 select * from Track

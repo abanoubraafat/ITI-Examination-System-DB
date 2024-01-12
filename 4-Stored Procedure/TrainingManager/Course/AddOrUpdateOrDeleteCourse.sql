@@ -1,6 +1,8 @@
 -------------------------AddCourse -------------------
 
-CREATE PROCEDURE AddCourse
+CREATE OR ALTER PROCEDURE AddCourse
+	@Username varchar(10),
+	@Password varchar(10),		
 	@ID INT,
     @CourseName nvarchar(50),
     @MinDegree int,
@@ -8,7 +10,12 @@ CREATE PROCEDURE AddCourse
     @Description nvarchar(max)
 AS
 BEGIN
-    IF NOT EXISTS (SELECT 1 FROM Course WHERE [Name] = @CourseName)
+	IF not (@Username = 'manager' and @Password = 'manager')
+	begin
+		SELECT 'Access Denied' AS ResultMessage
+		RETURN
+	end
+    ELSE IF NOT EXISTS (SELECT 1 FROM Course WHERE [Name] = @CourseName)
     BEGIN
         INSERT INTO Course (ID,[Name], MinDegree, MaxDegree, [Description])
         VALUES (@ID,  @CourseName, @MinDegree, @MaxDegree, @Description);
@@ -23,6 +30,7 @@ END;
 --test
 select * from Course
 EXEC AddCourse
+ 'manager', 'manager', 
 	@ID=6,
     @CourseName = 'js',
     @MinDegree = 25,
@@ -30,12 +38,16 @@ EXEC AddCourse
     @Description = 'third course in front End';
 select * from Course
 EXEC AddCourse
+ 'manager', 'manager', 
+ 	@ID=7,
     @CourseName = 'css',
     @MinDegree = 25,
     @MaxDegree = 70,
     @Description = 'second course in front End';
 select * from Course
 	EXEC AddCourse
+ 'manager', 'manager', 
+ 	@ID=7,
     @CourseName = 'css',
     @MinDegree = 25,
     @MaxDegree = 70,
@@ -44,6 +56,8 @@ select * from Course
 -------------------------UpdateCourse -------------------
 
 CREATE OR ALTER PROCEDURE UpdateCourse
+	@Username varchar(10),
+	@Password varchar(10),		
 	@OldID INT,
 	@NEWID INT,
     @NewCourseName nvarchar(50),
@@ -82,11 +96,18 @@ SELECT * FROM Course
 
 ----------------------------Delete Course-------------
 
-CREATE PROCEDURE DeleteCourse
+CREATE OR ALTER PROCEDURE DeleteCourse
+	@Username varchar(10),
+	@Password varchar(10),		
     @CourseID nvarchar(50)
 AS
 BEGIN
-    IF EXISTS (SELECT 1 FROM Course WHERE ID= @CourseID)
+	IF not (@Username = 'manager' and @Password = 'manager')
+	begin
+		SELECT 'Access Denied' AS ResultMessage
+		RETURN
+	end
+    ELSE IF EXISTS (SELECT 1 FROM Course WHERE ID= @CourseID)
     BEGIN
         DELETE FROM Course
         WHERE ID = @CourseID;
@@ -100,4 +121,4 @@ BEGIN
 END;
 --test
 Select * from Course
-EXEC DeleteCourse @CourseID= 6;
+EXEC DeleteCourse 'manager', 'manager',  @CourseID= 6;

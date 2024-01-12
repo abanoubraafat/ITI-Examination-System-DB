@@ -1,9 +1,16 @@
  -------------------------------------AddOneOrMoreBranch---------------------
  
-create proc AddOneOrMoreBranche
+create or alter proc AddOneOrMoreBranche
+	@Username varchar(10),
+	@Password varchar(10),
     @BranchNames nvarchar(MAX)
 as
 begin
+	IF not (@Username = 'manager' and @Password = 'manager')
+	begin
+		SELECT 'Access Denied' AS ResultMessage
+		RETURN
+	end
     create table #TempBranches
     (
         BranchName nvarchar(50)
@@ -46,18 +53,25 @@ begin
 END;
 --test
 select * from  Branch
-exec AddOneOrMoreBranche @BranchNames = 'Sohag';
+exec AddOneOrMoreBranche 'manager', 'manager',  @BranchNames = 'Sohag';
 select * from  Branch
 
 
 --------------------Update the Branch----------------
 
-CREATE PROCEDURE UpdateBranchNames
+CREATE OR ALTER PROCEDURE UpdateBranchNames
+	@Username varchar(10),
+	@Password varchar(10),
     @OldBranchName nvarchar(50),
     @NewBranchName nvarchar(50)
 AS
 BEGIN
-    IF EXISTS (SELECT 1 FROM Branch WHERE Name = @OldBranchName)
+	IF not (@Username = 'manager' and @Password = 'manager')
+	begin
+		SELECT 'Access Denied' AS ResultMessage
+		RETURN
+	end
+    ELSE IF EXISTS (SELECT 1 FROM Branch WHERE Name = @OldBranchName)
     BEGIN
         UPDATE Branch
         SET Name = @NewBranchName
@@ -74,20 +88,29 @@ END;
 --test
 select * from Branch
 EXEC UpdateBranchNames
+'manager', 'manager', 
     @OldBranchName = 'cairo',
     @NewBranchName = 'miniya';
 select * from Branch
 EXEC UpdateBranchNames
+'manager', 'manager', 
     @OldBranchName = 'cairo',
     @NewBranchName = 'miniya';
 
 -----------------------------Delete Branch-------------
 
-CREATE PROCEDURE DeleteBranch
+CREATE OR ALTER PROCEDURE DeleteBranch
+	@Username varchar(10),
+	@Password varchar(10),
     @BranchID INT
 AS
 BEGIN
-    IF EXISTS (SELECT 1 FROM Branch WHERE ID = @BranchID)
+	IF not (@Username = 'manager' and @Password = 'manager')
+	begin
+		SELECT 'Access Denied' AS ResultMessage
+		RETURN
+	end
+    ELSE IF EXISTS (SELECT 1 FROM Branch WHERE ID = @BranchID)
     BEGIN
         DELETE FROM Branch
         WHERE ID = @BranchID;
@@ -100,5 +123,5 @@ BEGIN
     END
 END;
 select * from Branch
-EXEC DeleteBranch @BranchID = 7;
+EXEC DeleteBranch 'manager', 'manager',  @BranchID = 7;
 select * from Branch

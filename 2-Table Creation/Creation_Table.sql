@@ -108,15 +108,28 @@ CREATE TABLE Exam
 (
     ID INT PRIMARY KEY ,
     NumberOfQuestions INT NOT NULL,
-    StartTime DATE,
-    EndTime DATE,
+    StartTime DATETIME,
+    EndTime DATETIME,
     TotalTime AS DATEDIFF(MINUTE, StartTime, EndTime),
     TotalDegree INT,
     Corrective BIT NOT NULL,
     Normal BIT NOT NULL,
-
-
 );
+
+--IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'Exam' AND COLUMN_NAME = 'TotalTime')
+--BEGIN
+--    ALTER TABLE Exam
+--    DROP COLUMN TotalTime;
+--END
+
+---- Alter the data type of StartTime and EndTime columns
+--ALTER TABLE Exam
+----ALTER COLUMN StartTime DATETIME,
+--ALTER COLUMN EndTime DATETIME;
+
+---- Recreate the TotalTime column with the new data types
+--ALTER TABLE Exam
+--ADD TotalTime AS DATEDIFF(MINUTE, StartTime, EndTime);
 -------------------- create table 9 Question --------------------
 
 CREATE TABLE Question
@@ -319,6 +332,5 @@ create table StudentExam
 		ON UPDATE CASCADE
 		ON DELETE CASCADE
 );
-
 
 

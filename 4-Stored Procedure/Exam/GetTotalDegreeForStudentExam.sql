@@ -35,10 +35,17 @@
 
 
 CREATE OR ALTER PROCEDURE GetTotalDegreeForStudentExam
+	@Username varchar(10),
+	@Password varchar(10),
     @student_id INT,
     @exam_id INT
 AS
 BEGIN
+	IF not((@Username = 'instructor' and @Password = 'instructor') or (@Username = 'student' and @Password = 'student'))
+	begin
+		SELECT 'Access Denied' AS ResultMessage
+		RETURN
+	end
     -- Data validation: Check if @student_id and @exam_id are greater than zero
     IF @student_id <= 0 OR @exam_id <= 0
     BEGIN
@@ -83,5 +90,5 @@ END
 
 
 select * from StudentExamQuestions
-EXEC CorrectExamForStudentt 1, 1
-EXEC GetTotalDegreeForStudentExam 1, 1
+EXEC CorrectExamForStudent  'instructor', 'instructor', 1, 1
+EXEC GetTotalDegreeForStudentExam  'student', 'student', 1, 1
