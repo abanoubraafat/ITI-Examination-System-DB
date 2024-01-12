@@ -1,8 +1,6 @@
 -----------------------------AddNewquestion--------------------------
 
 CREATE OR ALTER PROC AddQuestion
-	@Username varchar(10),
-	@Password varchar(10),	
     @Text_Questions NVARCHAR(MAX) = NULL,
     @Correct_Answer_Text_Questions NVARCHAR(MAX) = NULL,
     @True_or_False_Questions NVARCHAR(MAX) = NULL,
@@ -13,11 +11,6 @@ CREATE OR ALTER PROC AddQuestion
     @Questions_ID INT OUTPUT
 AS
 BEGIN
-	IF not (@Username = 'manager' and @Password = 'manager')
-	begin
-		SELECT 'Access Denied' AS ResultMessage
-		RETURN
-	end
     BEGIN TRY
         -- Check if the ID already exists
         IF NOT EXISTS (SELECT 1 FROM Question WHERE Questions_ID = @Questions_ID)
@@ -49,8 +42,6 @@ GO
 -------------------------Update Question -------------------
 
 CREATE OR ALTER PROC UpdateQuestion
-	@Username varchar(10),
-	@Password varchar(10),	
     @Text_Questions NVARCHAR(MAX) = NULL,
     @Correct_Answer_Text_Questions NVARCHAR(MAX) = NULL,
     @True_or_False_Questions NVARCHAR(MAX) = NULL,
@@ -61,11 +52,6 @@ CREATE OR ALTER PROC UpdateQuestion
     @Questions_ID INT 
 AS
 BEGIN
-	IF not (@Username = 'manager' and @Password = 'manager')
-	begin
-		SELECT 'Access Denied' AS ResultMessage
-		RETURN
-	end
     BEGIN TRY
         -- Check if the ID already exists
         IF EXISTS (SELECT 1 FROM Question WHERE Questions_ID = @Questions_ID)
@@ -98,17 +84,10 @@ Go
 ----------------------------Delete Question-------------
 
 CREATE OR ALTER PROCEDURE DeleteQuestion
-	@Username varchar(10),
-	@Password varchar(10),	
     @QuestionID int
 AS
 BEGIN
-	IF not (@Username = 'manager' and @Password = 'manager')
-	begin
-		SELECT 'Access Denied' AS ResultMessage
-		RETURN
-	end
-    ELSE IF EXISTS (SELECT 1 FROM Question WHERE Questions_ID = @QuestionID)
+    IF EXISTS (SELECT 1 FROM Question WHERE Questions_ID = @QuestionID)
     BEGIN
         DELETE FROM Question
         WHERE Questions_ID = @QuestionID;

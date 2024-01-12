@@ -1,17 +1,10 @@
 CREATE OR ALTER PROCEDURE CorrectExamForStudent 
-	@Username varchar(10),
-	@Password varchar(10),
     @std_id INT, 
     @exam_id INT
 AS
 BEGIN
-	IF not(@Username = 'instructor' and @Password = 'instructor')
-	begin
-		SELECT 'Access Denied' AS ResultMessage
-		RETURN
-	end
     -- Data validation: Check if @std_id and @exam_id are greater than zero
-   	 ELSE IF @std_id <= 0 OR @exam_id <= 0
+   	IF @std_id <= 0 OR @exam_id <= 0
     BEGIN
         SELECT 'Invalid input. Student ID and Exam ID must be greater than zero.' AS ResultMessage
         RETURN

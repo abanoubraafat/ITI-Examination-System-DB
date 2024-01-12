@@ -1,18 +1,11 @@
 ----------------------- Add_Instractor_Course ------------------------
-CREATE OR ALTER PROCEDURE AddInstructorCourse
-	@Username varchar(10),
-	@Password varchar(10),		
+CREATE OR ALTER PROCEDURE AddInstructorCourse	
     @Instructor_ID INT,
     @Course_ID INT
 AS
 BEGIN
-	IF not(@Username = 'manager' and @Password = 'manager')
-	begin
-		SELECT 'Access Denied' AS ResultMessage
-		RETURN
-	end
     -- Check if Instructor_ID exists in Instructor table
-    ELSE IF NOT EXISTS (SELECT 1 FROM Instructor WHERE ID = @Instructor_ID)
+    IF NOT EXISTS (SELECT 1 FROM Instructor WHERE ID = @Instructor_ID)
     BEGIN
         SELECT 'Instructor not found In DB' AS ResultMessage;
         RETURN;
@@ -39,27 +32,20 @@ BEGIN
     SELECT 'Instructor assigned to course successfully.' AS ResultMessage;
 END
 SELECT * FROM InstructorCourse
-EXEC AddInstructorCourse 'manager', 'manager', @Instructor_ID = 2, @Course_ID = 4;
+EXEC AddInstructorCourse @Instructor_ID = 2, @Course_ID = 4;
 
-EXEC AddInstructorCourse 'manager', 'manager', @Instructor_ID = 7, @Course_ID = 4;
-EXEC AddInstructorCourse 'manager', 'manager', @Instructor_ID = 2, @Course_ID = 8;
-EXEC AddInstructorCourse 'manager', 'manager', @Instructor_ID = 2, @Course_ID = 4;
+EXEC AddInstructorCourse @Instructor_ID = 7, @Course_ID = 4;
+EXEC AddInstructorCourse  @Instructor_ID = 2, @Course_ID = 8;
+EXEC AddInstructorCourse  @Instructor_ID = 2, @Course_ID = 4;
 ----------------------- Update_Instractor_Course ------------------------
-CREATE OR ALTER PROCEDURE UpdateInstructorCourse
-	@Username varchar(10),
-	@Password varchar(10),		
+CREATE OR ALTER PROCEDURE UpdateInstructorCourse	
     @Instructor_ID INT,
     @Old_Course_ID INT,
     @New_Course_ID INT
 AS
 BEGIN
-	IF not (@Username = 'manager' and @Password = 'manager')
-	begin
-		SELECT 'Access Denied' AS ResultMessage
-		RETURN
-	end
     -- Check if Instructor_ID exists in InstructorCourse table
-    ELSE IF NOT EXISTS (SELECT 1 FROM InstructorCourse WHERE Instructor_ID = @Instructor_ID)
+    IF NOT EXISTS (SELECT 1 FROM InstructorCourse WHERE Instructor_ID = @Instructor_ID)
     BEGIN
         SELECT 'Instructor does not teach any course' AS ResultMessage;
         RETURN;
@@ -114,26 +100,19 @@ BEGIN
 END
 
 select * from InstructorCourse
-EXEC UpdateInstructorCourse 'manager', 'manager', @Instructor_ID = 1, @Old_Course_ID = 1, @New_Course_ID = 3;
+EXEC UpdateInstructorCourse @Instructor_ID = 1, @Old_Course_ID = 1, @New_Course_ID = 3;
 
-EXEC UpdateInstructorCourse 'manager', 'manager', @Instructor_ID = 4, @Old_Course_ID = 1, @New_Course_ID = 3;
-EXEC UpdateInstructorCourse 'manager', 'manager', @Instructor_ID = 2, @Old_Course_ID = 4, @New_Course_ID = 1;
-EXEC UpdateInstructorCourse 'manager', 'manager',  @Instructor_ID = 1, @Old_Course_ID = 1, @New_Course_ID = 3;
+EXEC UpdateInstructorCourse @Instructor_ID = 4, @Old_Course_ID = 1, @New_Course_ID = 3;
+EXEC UpdateInstructorCourse  @Instructor_ID = 2, @Old_Course_ID = 4, @New_Course_ID = 1;
+EXEC UpdateInstructorCourse  @Instructor_ID = 1, @Old_Course_ID = 1, @New_Course_ID = 3;
 -------------------------------DELETE_Instractor_Course-----------------------
-CREATE OR ALTER PROCEDURE DeleteInstructorCourse
-	@Username varchar(10),
-	@Password varchar(10),		
+CREATE OR ALTER PROCEDURE DeleteInstructorCourse	
     @Instructor_ID INT,
     @Course_ID INT
 AS
 BEGIN
-	IF not (@Username = 'manager' and @Password = 'manager')
-	begin
-		SELECT 'Access Denied' AS ResultMessage
-		RETURN
-	end
     -- Check if Instructor_ID exists in InstructorCourse table
-    ELSE IF NOT EXISTS (SELECT 1 FROM InstructorCourse WHERE Instructor_ID = @Instructor_ID)
+    IF NOT EXISTS (SELECT 1 FROM InstructorCourse WHERE Instructor_ID = @Instructor_ID)
     BEGIN
         SELECT 'Instructor does not teach any course' AS ResultMessage;
         RETURN;
@@ -160,7 +139,7 @@ BEGIN
     SELECT 'Instructor course deleted successfully.' AS ResultMessage;
 END
 select * from InstructorCourse
-EXEC DeleteInstructorCourse 'manager', 'manager', @Instructor_ID = 2, @Course_ID = 1;
+EXEC DeleteInstructorCourse @Instructor_ID = 2, @Course_ID = 1;
 
-EXEC DeleteInstructorCourse 'manager', 'manager', @Instructor_ID = 4, @Course_ID = 1;
-EXEC DeleteInstructorCourse 'manager', 'manager', @Instructor_ID = 2, @Course_ID = 5;
+EXEC DeleteInstructorCourse @Instructor_ID = 4, @Course_ID = 1;
+EXEC DeleteInstructorCourse @Instructor_ID = 2, @Course_ID = 5;

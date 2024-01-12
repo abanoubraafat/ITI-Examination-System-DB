@@ -1,8 +1,6 @@
 --Instructor creates an exam with random questions auto selected from the question pool (related to his course)
 --1-Generating the exam and inserting the questions to it.
 create or alter proc GenerateRandomQuestionsCourseExam_Proc 
-	@Username varchar(10),
-	@Password varchar(10),
 	@Instructor_ID int,
 	@Course_ID int,
 	@MCQ_No int,
@@ -15,12 +13,7 @@ create or alter proc GenerateRandomQuestionsCourseExam_Proc
     @Normal BIT
 as
 begin
-	IF not(@Username = 'instructor' and @Password = 'instructor')
-	begin
-		SELECT 'Access Denied' AS ResultMessage
-		RETURN
-	end
-	 ELSE IF @Instructor_ID <= 0 or @Course_ID <= 0 or @MCQ_No <= 0 or @TF_No <= 0 or @TextQ_No <= 0 or @TotalDegree < 0 or @Instructor_ID is null or @Course_ID is null or @MCQ_No is null or @TF_No is null or @TextQ_No is null or @TotalDegree is null or @Normal is null or @Corrective is null
+	IF @Instructor_ID <= 0 or @Course_ID <= 0 or @MCQ_No <= 0 or @TF_No <= 0 or @TextQ_No <= 0 or @TotalDegree < 0 or @Instructor_ID is null or @Course_ID is null or @MCQ_No is null or @TF_No is null or @TextQ_No is null or @TotalDegree is null or @Normal is null or @Corrective is null
 		BEGIN
 			SELECT 'Invalid input.' AS ResultMessage
 			RETURN
@@ -118,8 +111,6 @@ select * from StudentExam where Exam_ID = 40
  select * from ExamQuestion
  delete from ExamQuestion
 exec GenerateRandomQuestionsCourseExam_Proc 
-	'instructor',
-	'instructor',
 	1,
 	1,
 	2,
@@ -133,18 +124,11 @@ exec GenerateRandomQuestionsCourseExam_Proc
    select * from Exam where ID = 19
 --2- Displaying the auto generated exam questions to assign a degree to each of them
 create or alter proc ShowExamQuestions_Proc
-		@Username varchar(10),
-		@Password varchar(10),
 		@Instructor_ID int,
 		@Exam_ID int
 as
 begin
-IF not(@Username = 'instructor' and @Password = 'instructor')
-	begin
-		SELECT 'Access Denied' AS ResultMessage
-		RETURN
-	end
-ELSE IF @Instructor_ID <= 0 or @Exam_ID <= 0 or @Instructor_ID is null or @Exam_ID is null
+IF @Instructor_ID <= 0 or @Exam_ID <= 0 or @Instructor_ID is null or @Exam_ID is null
 		BEGIN
 			SELECT 'Invalid input.' AS ResultMessage
 			RETURN
@@ -236,24 +220,17 @@ ELSE IF @Instructor_ID <= 0 or @Exam_ID <= 0 or @Instructor_ID is null or @Exam_
 end
 
 --test
-exec ShowExamQuestions_Proc 'instructor','instructor', 2,32
+exec ShowExamQuestions_Proc 2,32
 
 --3-Assign grade for each question of the exam
 create or alter proc AddGradeToQuestion_Proc
-				@Username varchar(10),
-				@Password varchar(10),
 				@Instructor_ID int,
 				@Exam_ID int,
 				@Question_ID int,
 				@Question_Grade int
 as
 begin
-	IF not(@Username = 'instructor' and @Password = 'instructor')
-		begin
-			SELECT 'Access Denied' AS ResultMessage
-			RETURN
-		end
-	ELSE IF @Instructor_ID <= 0 or @Exam_ID <= 0 or @Question_ID <= 0 or @Question_Grade <= 0 or @Instructor_ID is null or @Exam_ID is null or @Question_ID is null or @Question_Grade is null
+	IF @Instructor_ID <= 0 or @Exam_ID <= 0 or @Question_ID <= 0 or @Question_Grade <= 0 or @Instructor_ID is null or @Exam_ID is null or @Question_ID is null or @Question_Grade is null
 		BEGIN
 			SELECT 'Invalid input.' AS ResultMessage
 			RETURN
@@ -329,7 +306,6 @@ begin
 end
 select * from ExamQuestion where Exam_ID = 32
 exec AddGradeToQuestion_Proc
-'instructor','instructor',
 				1,
 				32,
 				4,

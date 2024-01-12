@@ -1,17 +1,10 @@
 -------------------------AddOneIntake -------------------
 
-CREATE PROCEDURE AddIntake
-	@Username varchar(10),
-	@Password varchar(10),	
+CREATE OR ALTER PROCEDURE AddIntake
     @IntakeName nvarchar(50)
 AS
 BEGIN
-	IF not (@Username = 'manager' and @Password = 'manager')
-	begin
-		SELECT 'Access Denied' AS ResultMessage
-		RETURN
-	end
-   ELSE IF NOT EXISTS (SELECT 1 FROM Intake WHERE Name = @IntakeName)
+	IF NOT EXISTS (SELECT 1 FROM Intake WHERE Name = @IntakeName)
     BEGIN
          INSERT INTO Intake (Name)
         VALUES (@IntakeName);
@@ -26,19 +19,12 @@ GO
 
 --------------------------update the intake ------------
 
-CREATE PROCEDURE UpdateIntakeNames
-	@Username varchar(10),
-	@Password varchar(10),	
+CREATE OR ALTER PROCEDURE UpdateIntakeNames
     @OldIntakeName nvarchar(50),
     @NewIntakeName nvarchar(50)
 AS
 BEGIN
-	IF not (@Username = 'manager' and @Password = 'manager')
-	begin
-		SELECT 'Access Denied' AS ResultMessage
-		RETURN
-	end
-    ELSE IF EXISTS (SELECT 1 FROM Intake WHERE Name = @OldIntakeName)
+	IF EXISTS (SELECT 1 FROM Intake WHERE Name = @OldIntakeName)
     BEGIN
         UPDATE Intake
         SET Name = @NewIntakeName
@@ -56,18 +42,11 @@ GO
 
 ----------------------------Delete Intake-------------
 
-CREATE PROCEDURE DeleteIntake
-	@Username varchar(10),
-	@Password varchar(10),	
+CREATE OR ALTER PROCEDURE DeleteIntake
     @IntakeID nvarchar(50)
 AS
 BEGIN
-	IF not (@Username = 'manager' and @Password = 'manager')
-	begin
-		SELECT 'Access Denied' AS ResultMessage
-		RETURN
-	end
-    ELSE IF EXISTS (SELECT 1 FROM Intake WHERE ID = @IntakeID)
+	IF EXISTS (SELECT 1 FROM Intake WHERE ID = @IntakeID)
     BEGIN
         DELETE FROM Intake
         WHERE ID = @IntakeID;

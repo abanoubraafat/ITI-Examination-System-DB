@@ -1,18 +1,11 @@
 
-create or alter proc AssignExamToStudent
-			@Username varchar(10),
-			@Password varchar(10),		
+create or alter proc AssignExamToStudent	
 			@Instructor_ID int,
 			@Exam_ID int,
 			@Student_ID int
 as
 begin
-	IF not(@Username = 'instructor' and @Password = 'instructor')
-	begin
-		SELECT 'Access Denied' AS ResultMessage
-		RETURN
-	end
-	ELSE IF @Instructor_ID <= 0 or @Exam_ID <= 0 or @Student_ID <= 0 or @Instructor_ID is null or @Exam_ID is null or @Student_ID is null
+	IF @Instructor_ID <= 0 or @Exam_ID <= 0 or @Student_ID <= 0 or @Instructor_ID is null or @Exam_ID is null or @Student_ID is null
 		BEGIN
 			SELECT 'Invalid input.' AS ResultMessage
 			RETURN
@@ -58,27 +51,18 @@ begin
 		select 'Student Added to Exam Successfully!' as ResultMessage
 end
 exec AssignExamToStudent
-			'instructor',
-			'instructor',
 			@Instructor_ID = 2,
 			@Exam_ID = 32,
 			@Student_ID = 2
 
 delete from StudentExam where Exam_ID = 32
-create or alter proc DeleteAssignedStudentExam
-			@Username varchar(10),
-			@Password varchar(10),	
+create or alter proc DeleteAssignedStudentExam	
 			@Instructor_ID int,
 			@Exam_ID int,
 			@Student_ID int
 as
 begin
-	IF not(@Username = 'instructor' and @Password = 'instructor')
-	begin
-		SELECT 'Access Denied' AS ResultMessage
-		RETURN
-	end
-	ELSE IF @Instructor_ID <= 0 or @Exam_ID <= 0 or @Student_ID <= 0 or  @Instructor_ID is null or @Exam_ID is null or @Student_ID is null
+	IF @Instructor_ID <= 0 or @Exam_ID <= 0 or @Student_ID <= 0 or  @Instructor_ID is null or @Exam_ID is null or @Student_ID is null
 		BEGIN
 			SELECT 'Invalid input.' AS ResultMessage
 			RETURN
@@ -132,8 +116,6 @@ begin
 end
 
 exec DeleteAssignedStudentExam 
-			'instructor',
-			'instructor',
 			@Instructor_ID = 2,
 			@Exam_ID = 32,
 			@Student_ID = 2

@@ -1,8 +1,6 @@
 -------------------------------------AddNewStudent------------------------
 
 CREATE OR ALTER PROCEDURE AddStudent
-	@Username varchar(10),
-	@pass varchar(10),		
 	@ID INT,
     @FName nvarchar(15),
     @LName nvarchar(15),
@@ -11,12 +9,7 @@ CREATE OR ALTER PROCEDURE AddStudent
     @Password nvarchar(50)
 AS
 BEGIN
-	IF not (@Username = 'manager' and @pass = 'manager')
-	begin
-		SELECT 'Access Denied' AS ResultMessage
-		RETURN
-	end
-    ELSE IF NOT EXISTS (SELECT 1 FROM Student WHERE Email = @Email)
+	IF NOT EXISTS (SELECT 1 FROM Student WHERE Email = @Email)
     BEGIN
         IF (
 		    
@@ -50,8 +43,6 @@ GO
 -------------------------Update Student -------------------
 
 CREATE OR ALTER PROCEDURE UpdateStudent
-	@Username varchar(10),
-	@pass varchar(10),	
     @StudentID int,
     @FName nvarchar(15),
     @LName nvarchar(15),
@@ -60,12 +51,7 @@ CREATE OR ALTER PROCEDURE UpdateStudent
     @Password nvarchar(50)
 AS
 BEGIN
-	IF not (@Username = 'manager' and @pass = 'manager')
-	begin
-		SELECT 'Access Denied' AS ResultMessage
-		RETURN
-	end
-    ELSE IF EXISTS (SELECT 1 FROM Student WHERE ID = @StudentID)
+	IF EXISTS (SELECT 1 FROM Student WHERE ID = @StudentID)
     BEGIN
         IF (
             @Email LIKE '%@gmail.com' OR 
@@ -103,18 +89,11 @@ GO
 
 ----------------------------Delete student-------------
 
-CREATE OR ALTER PROCEDURE DeleteStudent
-	@Username varchar(10),
-	@pass varchar(10),		
+CREATE OR ALTER PROCEDURE DeleteStudent	
     @StudentID int
 AS
 BEGIN
-	IF not (@Username = 'manager' and @pass = 'manager')
-	begin
-		SELECT 'Access Denied' AS ResultMessage
-		RETURN
-	end
-    ELSE IF EXISTS (SELECT 1 FROM Student WHERE ID = @StudentID)
+	IF EXISTS (SELECT 1 FROM Student WHERE ID = @StudentID)
     BEGIN
         DELETE FROM Student
         WHERE ID = @StudentID;

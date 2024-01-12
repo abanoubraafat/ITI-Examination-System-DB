@@ -1,20 +1,13 @@
 -------------------------AddNewInstructor -------------------
 
 CREATE Or ALTER PROCEDURE AddInstructor
-	@Username varchar(10),
-	@pass varchar(10),	
     @FName nvarchar(15),
     @LName nvarchar(15),
     @Email nvarchar(50),
     @Password nvarchar(50)
 AS
 BEGIN
-	IF not (@Username = 'manager' and @pass = 'manager')
-	begin
-		SELECT 'Access Denied' AS ResultMessage
-		RETURN
-	end
-    ELSE IF NOT EXISTS (SELECT 1 FROM Instructor WHERE Email = @Email)
+	IF NOT EXISTS (SELECT 1 FROM Instructor WHERE Email = @Email)
     BEGIN
         IF (
             @Email LIKE '%@gmail.com' OR 
@@ -49,8 +42,6 @@ GO
 -------------------------UpdateInstructor -------------------
 
 CREATE OR ALTER PROCEDURE UpdateInstructor
-	@Username varchar(10),
-	@pass varchar(10),		
     @InstructorID int,
     @FName nvarchar(15),
     @LName nvarchar(15),
@@ -58,12 +49,7 @@ CREATE OR ALTER PROCEDURE UpdateInstructor
     @Password nvarchar(25)
 AS
 BEGIN
-	IF not (@Username = 'manager' and @pass = 'manager')
-	begin
-		SELECT 'Access Denied' AS ResultMessage
-		RETURN
-	end
-    ELSE IF EXISTS (SELECT 1 FROM Instructor WHERE ID = @InstructorID)
+	IF EXISTS (SELECT 1 FROM Instructor WHERE ID = @InstructorID)
     BEGIN
         IF (
             @Email LIKE '%@gmail.com' OR 
@@ -100,18 +86,11 @@ GO
 
 ----------------------------Delete Instructor-------------
 
-CREATE OR ALTER PROCEDURE DeleteInstructorByID
-	@Username varchar(10),
-	@Password varchar(10),		
+CREATE OR ALTER PROCEDURE DeleteInstructorByID	
     @InstructorID int
 AS
 BEGIN
-	IF not (@Username = 'manager' and @Password = 'manager')
-	begin
-		SELECT 'Access Denied' AS ResultMessage
-		RETURN
-	end
-    ELSE IF EXISTS (SELECT 1 FROM Instructor WHERE ID = @InstructorID)
+    IF EXISTS (SELECT 1 FROM Instructor WHERE ID = @InstructorID)
     BEGIN
         DELETE FROM Instructor
         WHERE ID = @InstructorID;

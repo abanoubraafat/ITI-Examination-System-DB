@@ -1,7 +1,5 @@
 ---------------------------Add_Student_Branch_Intake_Track--------------
 CREATE OR ALTER PROCEDURE AddStudentRegistration
-	@Username varchar(10),
-	@Password varchar(10),	
     @Std_ID INT,
     @Intake_ID INT,
     @Track_ID INT,
@@ -9,12 +7,7 @@ CREATE OR ALTER PROCEDURE AddStudentRegistration
 AS
 BEGIN
     -- Check if Std_ID exists in Student table
-    IF not (@Username = 'manager' and @Password = 'manager')
-	begin
-		SELECT 'Access Denied' AS ResultMessage
-		RETURN
-	end
-    ELSE IF NOT EXISTS (SELECT 1 FROM Student WHERE ID = @Std_ID)
+    IF NOT EXISTS (SELECT 1 FROM Student WHERE ID = @Std_ID)
     BEGIN
         SELECT 'Student not found.' AS ResultMessage;
         RETURN;
@@ -59,17 +52,15 @@ BEGIN
 END
 
 SELECT * FROM StudentRegisteration 
-EXEC AddStudentRegistration 'manager', 'manager',  @Std_ID = 4, @Intake_ID = 1, @Track_ID = 1, @Branch_ID = 1;
+EXEC AddStudentRegistration  @Std_ID = 4, @Intake_ID = 1, @Track_ID = 1, @Branch_ID = 1;
 
-EXEC AddStudentRegistration 'manager', 'manager',  @Std_ID = 1, @Intake_ID = 1, @Track_ID = 1, @Branch_ID = 1;
-EXEC AddStudentRegistration 'manager', 'manager',  @Std_ID = 7, @Intake_ID = 1, @Track_ID = 2, @Branch_ID = 1;
-EXEC AddStudentRegistration 'manager', 'manager',  @Std_ID = 4, @Intake_ID = 8, @Track_ID = 2, @Branch_ID = 1;
-EXEC AddStudentRegistration 'manager', 'manager',  @Std_ID = 4, @Intake_ID = 1, @Track_ID = 8, @Branch_ID = 1;
-EXEC AddStudentRegistration 'manager', 'manager',  @Std_ID = 4, @Intake_ID = 1, @Track_ID = 2, @Branch_ID = 8;
+EXEC AddStudentRegistration @Std_ID = 1, @Intake_ID = 1, @Track_ID = 1, @Branch_ID = 1;
+EXEC AddStudentRegistration @Std_ID = 7, @Intake_ID = 1, @Track_ID = 2, @Branch_ID = 1;
+EXEC AddStudentRegistration @Std_ID = 4, @Intake_ID = 8, @Track_ID = 2, @Branch_ID = 1;
+EXEC AddStudentRegistration @Std_ID = 4, @Intake_ID = 1, @Track_ID = 8, @Branch_ID = 1;
+EXEC AddStudentRegistration @Std_ID = 4, @Intake_ID = 1, @Track_ID = 2, @Branch_ID = 8;
 -------------------------------------Update_Student_Branch_Intake_Track------------------------------------------
 CREATE OR ALTER PROCEDURE UpdateStudentRegistration
-	@Username varchar(10),
-	@Password varchar(10),	
     @Std_ID INT,
     @NewIntake_ID INT,
     @NewTrack_ID INT,
@@ -77,12 +68,7 @@ CREATE OR ALTER PROCEDURE UpdateStudentRegistration
 AS
 BEGIN
     -- Check if Std_ID exists in StudentRegisteration table
-    IF not (@Username = 'manager' and @Password = 'manager')
-	begin
-		SELECT 'Access Denied' AS ResultMessage
-		RETURN
-	end
-    ELSE IF NOT EXISTS (SELECT 1 FROM StudentRegisteration WHERE Std_ID = @Std_ID)
+   IF NOT EXISTS (SELECT 1 FROM StudentRegisteration WHERE Std_ID = @Std_ID)
     BEGIN
         SELECT 'Student not found in StudentRegisteration.' AS ResultMessage;
         RETURN;
@@ -99,21 +85,14 @@ BEGIN
 END
 
 select * from StudentRegisteration
-EXEC UpdateStudentRegistration 'manager', 'manager',  @Std_ID = 2, @NewIntake_ID = 2, @NewTrack_ID = 3, @NewBranch_ID = 4;
+EXEC UpdateStudentRegistration @Std_ID = 2, @NewIntake_ID = 2, @NewTrack_ID = 3, @NewBranch_ID = 4;
 --------------------------DeleteStudentRegistration----------------------------------
 CREATE OR ALTER PROCEDURE DeleteStudentRegistration
-	@Username varchar(10),
-	@Password varchar(10),	
     @Std_ID INT
 AS
 BEGIN
     -- Check if Std_ID exists in StudentRegisteration table
-    IF not (@Username = 'manager' and @Password = 'manager')
-	begin
-		SELECT 'Access Denied' AS ResultMessage
-		RETURN
-	end
-    ELSE IF NOT EXISTS (SELECT 1 FROM StudentRegisteration WHERE Std_ID = @Std_ID)
+	IF NOT EXISTS (SELECT 1 FROM StudentRegisteration WHERE Std_ID = @Std_ID)
     BEGIN
         SELECT 'Student not found in StudentRegisteration.' AS ResultMessage;
         RETURN;
@@ -126,4 +105,4 @@ BEGIN
     SELECT 'Student registration deleted successfully.' AS ResultMessage;
 END
 select * from StudentRegisteration
-EXEC DeleteStudentRegistration 'manager', 'manager',  @Std_ID = 4;
+EXEC DeleteStudentRegistration @Std_ID = 4;

@@ -1,8 +1,6 @@
 -------------------------AddCourse -------------------
 
 CREATE OR ALTER PROCEDURE AddCourse
-	@Username varchar(10),
-	@Password varchar(10),		
 	@ID INT,
     @CourseName nvarchar(50),
     @MinDegree int,
@@ -10,12 +8,7 @@ CREATE OR ALTER PROCEDURE AddCourse
     @Description nvarchar(max)
 AS
 BEGIN
-	IF not (@Username = 'manager' and @Password = 'manager')
-	begin
-		SELECT 'Access Denied' AS ResultMessage
-		RETURN
-	end
-    ELSE IF NOT EXISTS (SELECT 1 FROM Course WHERE [Name] = @CourseName)
+	IF NOT EXISTS (SELECT 1 FROM Course WHERE [Name] = @CourseName)
     BEGIN
         INSERT INTO Course (ID,[Name], MinDegree, MaxDegree, [Description])
         VALUES (@ID,  @CourseName, @MinDegree, @MaxDegree, @Description);
@@ -31,9 +24,7 @@ Go
 
 -------------------------UpdateCourse -------------------
 
-CREATE OR ALTER PROCEDURE UpdateCourse
-	@Username varchar(10),
-	@Password varchar(10),		
+CREATE OR ALTER PROCEDURE UpdateCourse	
 	@OldID INT,
 	@NEWID INT,
     @NewCourseName nvarchar(50),
@@ -64,18 +55,11 @@ Go
 
 ----------------------------Delete Course-------------
 
-CREATE OR ALTER PROCEDURE DeleteCourse
-	@Username varchar(10),
-	@Password varchar(10),		
+CREATE OR ALTER PROCEDURE DeleteCourse	
     @CourseID nvarchar(50)
 AS
 BEGIN
-	IF not (@Username = 'manager' and @Password = 'manager')
-	begin
-		SELECT 'Access Denied' AS ResultMessage
-		RETURN
-	end
-    ELSE IF EXISTS (SELECT 1 FROM Course WHERE ID= @CourseID)
+	IF EXISTS (SELECT 1 FROM Course WHERE ID= @CourseID)
     BEGIN
         DELETE FROM Course
         WHERE ID = @CourseID;

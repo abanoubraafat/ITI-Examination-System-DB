@@ -1,93 +1,58 @@
 --Getting All Exams:
 CREATE OR ALTER PROCEDURE GetAllExams
-	@Username varchar(10),
-	@Password varchar(10)
 AS
 BEGIN
-	IF not(@Username = 'manager' and @Password = 'manager')
-	begin
-		SELECT 'Access Denied' AS ResultMessage
-		RETURN
-	end
-	 ELSE 
     SELECT *
     FROM Exam
 END
 --test
-EXEC GetAllExams  'manager','manager'
+EXEC GetAllExams
 
 --Getting Exams for a Specific Course:
 CREATE OR ALTER PROCEDURE GetExamsByCourse
-	@Username varchar(10),
-	@Password varchar(10),
     @CourseID INT
 AS
 BEGIN
-IF not(@Username = 'instructor' and @Password = 'instructor')
-	begin
-		SELECT 'Access Denied' AS ResultMessage
-		RETURN
-	end
     SELECT *
     FROM Exam
     WHERE ID = @CourseID
 END
 --test
-EXEC GetExamsByCourse  'instructor','instructor', @CourseID = 1
+EXEC GetExamsByCourse  @CourseID = 1
 
 --Getting Exams within a Date Range:
 CREATE OR ALTER PROCEDURE GetExamsByDateRange
-	@Username varchar(10),
-	@Password varchar(10),
     @StartDate DATE,
     @EndDate DATE
 AS
 BEGIN
-	IF not(@Username = 'manager' and @Password = 'manager')
-	begin
-		SELECT 'Access Denied' AS ResultMessage
-		RETURN
-	end
     SELECT *
     FROM Exam
     WHERE StartTime BETWEEN @StartDate AND @EndDate
 END
 --test
-EXEC GetExamsByDateRange  'manager','manager', @StartDate = '2024-01-01', @EndDate = '2024-01-31'
+EXEC GetExamsByDateRange @StartDate = '2024-01-01', @EndDate = '2024-01-31'
 
 --Getting Exam Details along with Course Information:
 CREATE OR ALTER PROCEDURE GetExamDetailsWithCourseInfo
-	@Username varchar(10),
-	@Password varchar(10),
     @ExamID INT
 AS
 BEGIN
-	IF not(@Username = 'instructor' and @Password = 'instructor')
-	begin
-		SELECT 'Access Denied' AS ResultMessage
-		RETURN
-	end
     SELECT E.*, C.[Name] AS Course_Name, C.Description AS Course_Description
     FROM Exam E
     INNER JOIN Course C ON E.ID = C.ID
     WHERE E.ID = @ExamID
 END
 --test
-EXEC GetExamDetailsWithCourseInfo 'manager','manager', @ExamID = 30
+EXEC GetExamDetailsWithCourseInfo @ExamID = 30
 
 
 --Retrieving Detailed Exam Information:
 CREATE OR ALTER PROCEDURE GetDetailedExamInfo
-	@Username varchar(10),
-	@Password varchar(10),
     @ExamID INT
 AS
 BEGIN
-	IF not(@Username = 'instructor' and @Password = 'instructor')
-	begin
-		SELECT 'Access Denied' AS ResultMessage
-		RETURN
-	end
+
     SELECT E.ID AS ExamID, E.NumberOfQuestions, E.StartTime, E.EndTime, E.TotalDegree,
            E.Corrective, E.Normal,
            C.ID AS CourseID, C.[Name] AS CourseName, C.MinDegree, C.MaxDegree, C.[Description] AS CourseDescription,
@@ -102,15 +67,8 @@ END
 
 --Retrieving Exams with Course Information:
 CREATE OR ALTER PROCEDURE GetExamsWithCourseInfo
-	@Username varchar(10),
-	@Password varchar(10)
 AS
 BEGIN
-	IF not(@Username = 'manager' and @Password = 'manager')
-	begin
-		SELECT 'Access Denied' AS ResultMessage
-		RETURN
-	end
     SELECT E.ID AS ExamID, E.NumberOfQuestions, E.StartTime, E.EndTime, E.TotalDegree,
            E.Corrective, E.Normal,
            C.ID AS CourseID, C.[Name] AS CourseName, C.MinDegree, C.MaxDegree, C.[Description] AS CourseDescription
@@ -118,7 +76,7 @@ BEGIN
     INNER JOIN Course C ON E.ID = C.ID
 END
 --test
-EXEC GetExamsWithCourseInfo 'manager','manager'
+EXEC GetExamsWithCourseInfo
 -------
 -- Create a view that combines information from StudentExamQuestions, ExamQuestion, Student, Exam, and Question tables
 CREATE OR ALTER VIEW ExamResultsView

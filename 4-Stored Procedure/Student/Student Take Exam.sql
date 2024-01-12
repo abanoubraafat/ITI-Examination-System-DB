@@ -1,17 +1,10 @@
 --Show Student Course Exams
 create or alter proc ShowStudentCourseExams_Proc
-		@Username varchar(10),
-		@Password varchar(10),	
 		@Student_ID int,
 		@Course_ID int
 as
 begin
-	IF not(@Username = 'student' and @Password = 'student')
-	begin
-		SELECT 'Access Denied' AS ResultMessage
-		RETURN
-	end
-	 ELSE IF @Student_ID <= 0 or @Course_ID <= 0 or @Student_ID is null or @Course_ID is null
+	IF @Student_ID <= 0 or @Course_ID <= 0 or @Student_ID is null or @Course_ID is null
 		BEGIN
 			SELECT 'Invalid input.' AS ResultMessage
 			RETURN
@@ -43,22 +36,15 @@ begin
 		on ce.Exam_ID = e.ID 
 		where ce.Course_ID = @Course_ID 
 end
-exec ShowStudentCourseExams_Proc 'student','student', 2,2
+exec ShowStudentCourseExams_Proc  2,2
 ----------------------------------------------------------------------------------------
 CREATE OR ALTER PROCEDURE TakeAndShowExamOnSpecificTime
-	@Username varchar(10),
-	@Password varchar(10),
     @std_id INT,
     @exam_id INT
 AS
 BEGIN
-    IF not(@Username = 'student' and @Password = 'student')
-	begin
-		SELECT 'Access Denied' AS ResultMessage
-		RETURN
-	end
 	 -- Check if the student and exam exist
-	 ELSE IF NOT EXISTS (SELECT 1 FROM Student WHERE ID = @std_id)
+	IF NOT EXISTS (SELECT 1 FROM Student WHERE ID = @std_id)
     BEGIN
         SELECT 'Student ID does not exist.' AS ResultMessage
         RETURN
@@ -184,7 +170,7 @@ BEGIN
 
 
 END
-EXEC TakeAndShowExamOnSpecificTime 'student','student', @std_id = 1, @exam_id = 6;
+EXEC TakeAndShowExamOnSpecificTime @std_id = 1, @exam_id = 6;
 
 
 

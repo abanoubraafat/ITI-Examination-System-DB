@@ -1,15 +1,8 @@
 -----------------------AddOneORMoreTrack---------------
-CREATE OR ALTER PROC AddTracks
-	@Username varchar(10),
-	@Password varchar(10),	
+CREATE OR ALTER PROC AddTracks	
     @TrackNames NVARCHAR(MAX)
 AS
 BEGIN
-	IF not (@Username = 'manager' and @Password = 'manager')
-	begin
-		SELECT 'Access Denied' AS ResultMessage
-		RETURN
-	end
     BEGIN TRY
         CREATE TABLE #TempTracks
         (
@@ -66,18 +59,11 @@ Go
 ----------------------------Update the Track-----------
 
 CREATE OR ALTER PROCEDURE UpdateTrackNames
-	@Username varchar(10),
-	@Password varchar(10),	
     @OldTrackName nvarchar(50),
     @NewTrackName nvarchar(50)
 AS
 BEGIN
-	IF not (@Username = 'manager' and @Password = 'manager')
-	begin
-		SELECT 'Access Denied' AS ResultMessage
-		RETURN
-	end
-    ELSE IF EXISTS (SELECT 1 FROM Track WHERE Name = @OldTrackName)
+	IF EXISTS (SELECT 1 FROM Track WHERE Name = @OldTrackName)
     BEGIN
         UPDATE Track
         SET Name = @NewTrackName
@@ -96,17 +82,10 @@ Go
 ----------------------------Delete Track---------------
 
 CREATE OR ALTER PROCEDURE DeleteTrack
-	@Username varchar(10),
-	@Password varchar(10),	
     @TrackID nvarchar(50)
 AS
 BEGIN
-IF not (@Username = 'manager' and @Password = 'manager')
-	begin
-		SELECT 'Access Denied' AS ResultMessage
-		RETURN
-	end
-    ELSE IF EXISTS (SELECT 1 FROM Track WHERE ID = @TrackID)
+IF EXISTS (SELECT 1 FROM Track WHERE ID = @TrackID)
     BEGIN
         DELETE FROM Track
         WHERE ID = @TrackID;

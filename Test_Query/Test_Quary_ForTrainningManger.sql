@@ -3,22 +3,20 @@
 
 --Add
 select * from  Branch
-exec AddOneOrMoreBranche 'manager', 'manager',  @BranchNames = 'Sohag';
+exec AddOneOrMoreBranche  @BranchNames = 'Sohag';
 select * from  Branch
 --Update
 select * from Branch
 EXEC UpdateBranchNames
-'manager', 'manager', 
     @OldBranchName = 'cairo',
     @NewBranchName = 'miniya';
 select * from Branch
 EXEC UpdateBranchNames
-'manager', 'manager', 
     @OldBranchName = 'cairo',
     @NewBranchName = 'miniya';
 --Delete
 select * from Branch
-EXEC DeleteBranch 'manager', 'manager',  @BranchID = 4;
+EXEC DeleteBranch @BranchID = 4;
 select * from Branch
 
 
@@ -28,15 +26,13 @@ select * from Branch
 --ADD
 select * from Course
 EXEC AddCourse
- 'manager', 'manager', 
-	@ID=5,
+ 	@ID=5,
     @CourseName = 'js',
     @MinDegree = 25,
     @MaxDegree = 70,
     @Description = 'third course in front End';
 select * from Course
 EXEC AddCourse
- 'manager', 'manager', 
  	@ID=7,
     @CourseName = 'jj',
     @MinDegree = 25,
@@ -44,7 +40,6 @@ EXEC AddCourse
     @Description = 'second course in front End';
 select * from Course
 	EXEC AddCourse
- 'manager', 'manager', 
  	@ID=7,
     @CourseName = 'css',
     @MinDegree = 25,
@@ -53,7 +48,6 @@ select * from Course
 --Update
 SELECT * FROM Course
 EXEC UpdateCourse
- 'manager', 'manager',
     @OldID = 2,
 	@NEWID=3,
     @NewCourseName = 'HTML',
@@ -63,21 +57,19 @@ EXEC UpdateCourse
 SELECT * FROM Course
 --Delete
 Select * from Course
-EXEC DeleteCourse 'manager', 'manager',  @CourseID= 6;
+EXEC DeleteCourse @CourseID= 6;
 
 -------(3) Add and Update And delete for Instractor -----------------
 
 --Add
 SELECT * FROM Instructor
 EXEC AddInstructor
- 'manager', 'manager', 
     @FName = 'mostafa',
     @LName = 'abdella',
     @Email = 'mostafaabdella88@gmail.com',
     @Password = 'Pass123t';
 SELECT * FROM Instructor
 EXEC AddInstructor
- 'manager', 'manager', 
     @FName = 'mostafa',
     @LName = 'abdella',
     @Email = 'mostafaabdella88@gmail.com',
@@ -85,7 +77,6 @@ EXEC AddInstructor
 
 	------with incorrect pass or email---------
 EXEC AddInstructor
- 'manager', 'manager', 
     @FName = 'mostafa',
     @LName = 'abdella',
     @Email = 'mostafaabdella88',
@@ -94,7 +85,6 @@ EXEC AddInstructor
 -- Update
 SELECT * FROM Instructor
 EXEC UpdateInstructor
- 'manager', 'manager', 
     @InstructorID = 1, 
     @FName = 'abounob',
     @LName = 'bebo',
@@ -102,7 +92,6 @@ EXEC UpdateInstructor
     @Password = 'Pass1234';
 SELECT * FROM Instructor
 EXEC UpdateInstructor
- 'manager', 'manager', 
     @InstructorID = 8 , 
     @FName = 'abounob',
     @LName = 'bebo',
@@ -111,33 +100,30 @@ EXEC UpdateInstructor
 
 --Delete
 SELECT * FROM Instructor
-EXEC DeleteInstructorByID  'manager', 'manager',  @InstructorID = 6;
+EXEC DeleteInstructorByID  @InstructorID = 6;
 
 -------(4) Add and Update And delete for Intake -----------------
 --Add
-exec AddIntake 'manager', 'manager',  @IntakeName  = '44';
-exec AddIntake 'manager', 'manager',  @IntakeName  = '66';
+exec AddIntake @IntakeName  = '44';
+exec AddIntake @IntakeName  = '66';
 select * from Intake
 --Update
 select * from Intake
 EXEC UpdateIntakeNames
-'manager', 'manager', 
     @OldIntakeName = '44',
     @NewIntakeName = '77';
 select * from Intake
 EXEC UpdateIntakeNames
-'manager', 'manager', 
     @OldIntakeName = '44',
     @NewIntakeName = '66';
 --Delete 
 select * from Intake
-EXEC DeleteIntake 'manager', 'manager',  @IntakeID = '6';
+EXEC DeleteIntake  @IntakeID = '6';
 
 ---------------(5)Add and Update And delete for Question -----------------
 --Add
 SELECT * FROM Question
 EXEC AddQuestion
- 'manager', 'manager', 
 	@Questions_ID=7,
     @Text_Questions ='what is the first course in Fornt End',
     @Correct_Answer_Text_Questions ='html',
@@ -150,7 +136,6 @@ SELECT * FROM Question
 --Update
 SELECT * FROM Question
 EXEC UpdateQuestion
- 'manager', 'manager', 
 	@Questions_ID=6,
     @Text_Questions ='what is the first course in Fornt End',
     @Correct_Answer_Text_Questions ='html',
@@ -163,13 +148,12 @@ SELECT * FROM Question
 
 --Delete
 SELECT * FROM Question
-EXEC DeleteQuestion  'manager', 'manager',  @QuestionID = 7;
+EXEC DeleteQuestion  @QuestionID = 7;
 
 ---------------(6)Add and Update And delete for Student -----------------
 --ADD
 SELECT * from Student
 EXEC AddStudent
- 'manager', 'manager', 
     @ID=7,
     @FName = 'ali',
     @LName = 'abdella',
@@ -180,7 +164,6 @@ SELECT * from Student
 
 --------------- Incorrect pass or email------------------ 
 EXEC AddStudent
- 'manager', 'manager', 
 	@ID=8,
     @FName = 'ali',
     @LName = 'abdella',
@@ -191,7 +174,6 @@ EXEC AddStudent
 --Update
 SELECT * FROM Student
 EXEC UpdateStudent
- 'manager', 'manager', 
     @StudentID = 7, 
     @FName = 'mostafa',
     @LName = 'abdella',
@@ -201,24 +183,22 @@ EXEC UpdateStudent
 SELECT * FROM Student
 --Delete
 SELECT * FROM Student
-EXEC DeleteStudent 'manager', 'manager',  @StudentID = 7;
+EXEC DeleteStudent  @StudentID = 7;
 
 ---------------(7)Add and Update And delete for track -----------------
 --Add
-exec AddTracks 'manager', 'manager',  @TrackNames = 'C#';
+exec AddTracks @TrackNames = 'C#';
 select * from Track
 --Update 
 select * from Track
 EXEC UpdateTrackNames
- 'manager', 'manager', 
     @OldTrackName = 'C#',
     @NewTrackName = 'c++';
 select * from Track
 EXEC UpdateTrackNames
- 'manager', 'manager', 
     @OldTrackName = '.net',
     @NewTrackName = 'c++';
 --Delete 
 select * from Track
-EXEC DeleteTrack  'manager', 'manager',  @TrackID = 5;
+EXEC DeleteTrack @TrackID = 5;
 select * from Track
