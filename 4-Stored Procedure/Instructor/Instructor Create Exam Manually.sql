@@ -62,17 +62,9 @@ begin
 			where sc.Course_ID = @Course_ID and ce.Exam_ID = @NewExam_ID
 			SELECT cast(@NewExam_ID as varchar(max)) + ' is the Exam number you can add questions with.' AS ResultMessage 
 end
---test
-select * from ExamQuestion
- delete from ExamQuestion
-exec SetManualQuestionsCourseExam_Proc 
-	2,
-	2,
-    '2024-1-13 14:30:00','2024-1-14 15:00:00',
-   0,
-   1
-   select * from ExamQuestion
-   select * from StudentExam where Exam_ID = 39
+
+GO
+
 --2- show questions available for that exam (that belongs to a specific course)
 create or alter proc ShowQuestionPoolForInstructorCourse
 			@Instructor_ID int,
@@ -110,8 +102,8 @@ begin
 			, Choose_An_Answer_Question 'MCQ Question with that no', Correct_Answer_Choose_Question 'MCQ Answer'
 			from Question where Course_Id = @Course_ID
 end
---test
- exec ShowQuestionPoolForInstructorCourse 2,2
+GO
+
 --3- add questions to the pre created exam in step 1 from pool displayed in step 2 
 ------------------------------------------
  create or alter proc AddQuestionToExamManually_Proc
@@ -132,17 +124,17 @@ begin
 			SELECT 'Question Type must be Text, MCQ or TF' AS ResultMessage
 			RETURN
 	end
-	else if not exists(select * from Exam where ID = @Exam_ID)
+	else if not exists(select 1 from Exam where ID = @Exam_ID)
 		begin
 			SELECT 'Exam does not exist.' AS ResultMessage
 			RETURN
 		end
-	else if not exists(select * from Instructor where ID = @Instructor_ID)
+	else if not exists(select 1 from Instructor where ID = @Instructor_ID)
 	begin
 		SELECT 'Instructor does not exist.' AS ResultMessage
 		RETURN
 	end
-	else if not exists(select * from Question where Questions_ID = @Question_ID)
+	else if not exists(select 1 from Question where Questions_ID = @Question_ID)
 	begin
 		SELECT 'Question does not exist.' AS ResultMessage
 		RETURN
@@ -189,7 +181,7 @@ begin
 			RETURN
 		end
 	else if exists
-		(select * from ExamQuestion where Exam_ID = @Exam_ID and Question_ID = @Question_ID)
+		(select 1 from ExamQuestion where Exam_ID = @Exam_ID and Question_ID = @Question_ID)
 		 begin
 			SELECT 'This Question is already added in the Exam' AS ResultMessage
 			RETURN
@@ -204,15 +196,7 @@ begin
 		where ID = @Exam_ID
 	END		
 end
-   select * from Exam where ID = 19
-exec AddQuestionToExamManually_Proc
-				2,
-				40,
-				4,
-				'TF',
-				10
-   select * from ExamQuestion where Exam_ID = 19
-   --delete from ExamQuestion
-   select * from CourseExam
+GO
+   
   -- delete from Exam where ID= 16
   --20

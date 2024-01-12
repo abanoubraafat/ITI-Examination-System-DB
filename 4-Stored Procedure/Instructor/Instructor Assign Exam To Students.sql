@@ -50,12 +50,8 @@ begin
 		values(@Student_ID, @Exam_ID)
 		select 'Student Added to Exam Successfully!' as ResultMessage
 end
-exec AssignExamToStudent
-			@Instructor_ID = 2,
-			@Exam_ID = 32,
-			@Student_ID = 2
+Go
 
-delete from StudentExam where Exam_ID = 32
 create or alter proc DeleteAssignedStudentExam	
 			@Instructor_ID int,
 			@Exam_ID int,
@@ -115,10 +111,6 @@ begin
 		END
 end
 
-exec DeleteAssignedStudentExam 
-			@Instructor_ID = 2,
-			@Exam_ID = 32,
-			@Student_ID = 2
-select * from StudentExam
+GO
 
 ---

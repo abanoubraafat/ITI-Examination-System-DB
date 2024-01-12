@@ -202,3 +202,14 @@ EXEC UpdateTrackNames
 select * from Track
 EXEC DeleteTrack @TrackID = 5;
 select * from Track
+---------------(8)Get All Exam -----------------
+--test
+EXEC GetAllExams
+
+---------------(8)Get  Range Date And Time for Exam -----------------
+--test
+EXEC GetExamsByDateRange @StartDate = '2024-01-01', @EndDate = '2024-01-31'
+
+---------------(9)Get  Exams with Course Information:
+--test
+EXEC GetExamsWithCourseInfo

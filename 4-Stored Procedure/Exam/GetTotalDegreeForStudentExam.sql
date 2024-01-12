@@ -1,37 +1,4 @@
---CREATE OR ALTER PROCEDURE GetTotalDegreeForStudentExam
---    @student_id INT,
---    @exam_id INT
---AS
---BEGIN
---    -- Data validation: Check if @student_id and @exam_id are greater than zero
---    IF @student_id <= 0 OR @exam_id <= 0
---    BEGIN
---        -- Return message for invalid input
---        SELECT 'Invalid input. Student ID and Exam ID must be greater than zero.' AS ResultMessage
---        RETURN
---    END
 
---    -- Data validation: Check if the pair (Std_ID, Exam_ID) exists in StudentExamQuestions table
---    IF NOT EXISTS (SELECT 1 FROM StudentExamQuestions WHERE Std_ID = @student_id AND Exam_ID = @exam_id)
---    BEGIN
---        -- Return message that the pair does not exist in the StudentExamQuestions table
---        SELECT 'Student ID and Exam ID pair does not exist in StudentExamQuestions table.' AS ResultMessage
---        RETURN
---    END
-
---    DECLARE @totalDegree INT
-
---    -- Calculate total degree by summing up question results
---    SELECT @totalDegree = ISNULL(SUM(Questions_result), 0)
---    FROM StudentExamQuestions
---    WHERE Std_ID = @student_id AND Exam_ID = @exam_id
-
---    -- Return the total degree
---    SELECT @totalDegree AS TotalDegree
---END
-
---select * from StudentExamQuestions
---EXEC GetTotalDegreeForStudentExam 1,2
 
 
 CREATE OR ALTER PROCEDURE GetTotalDegreeForStudentExam
@@ -82,6 +49,3 @@ BEGIN
 END
 
 
-select * from StudentExamQuestions
-EXEC CorrectExamForStudent 1, 1
-EXEC GetTotalDegreeForStudentExam 1, 1
