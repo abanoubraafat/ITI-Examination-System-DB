@@ -50,15 +50,9 @@ BEGIN
 
 
 END
+Go
 
-SELECT * FROM StudentRegisteration 
-EXEC AddStudentRegistration  @Std_ID = 4, @Intake_ID = 1, @Track_ID = 1, @Branch_ID = 1;
 
-EXEC AddStudentRegistration @Std_ID = 1, @Intake_ID = 1, @Track_ID = 1, @Branch_ID = 1;
-EXEC AddStudentRegistration @Std_ID = 7, @Intake_ID = 1, @Track_ID = 2, @Branch_ID = 1;
-EXEC AddStudentRegistration @Std_ID = 4, @Intake_ID = 8, @Track_ID = 2, @Branch_ID = 1;
-EXEC AddStudentRegistration @Std_ID = 4, @Intake_ID = 1, @Track_ID = 8, @Branch_ID = 1;
-EXEC AddStudentRegistration @Std_ID = 4, @Intake_ID = 1, @Track_ID = 2, @Branch_ID = 8;
 -------------------------------------Update_Student_Branch_Intake_Track------------------------------------------
 CREATE OR ALTER PROCEDURE UpdateStudentRegistration
     @Std_ID INT,
@@ -83,9 +77,9 @@ BEGIN
 
     SELECT 'Student Info updated successfully.' AS ResultMessage;
 END
+GO
 
-select * from StudentRegisteration
-EXEC UpdateStudentRegistration @Std_ID = 2, @NewIntake_ID = 2, @NewTrack_ID = 3, @NewBranch_ID = 4;
+
 --------------------------DeleteStudentRegistration----------------------------------
 CREATE OR ALTER PROCEDURE DeleteStudentRegistration
     @Std_ID INT
@@ -104,5 +98,4 @@ BEGIN
 
     SELECT 'Student registration deleted successfully.' AS ResultMessage;
 END
-select * from StudentRegisteration
-EXEC DeleteStudentRegistration @Std_ID = 4;
+GO

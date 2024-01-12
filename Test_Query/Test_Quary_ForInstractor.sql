@@ -53,24 +53,72 @@ select * from StudentExam
 
 exec SetManualQuestionsCourseExam_Proc 
 	2,
-	1,
+	2,
     '2024-1-13 14:30:00','2024-1-14 15:00:00',
    0,
    1
 select * from Exam
 -----------------------------(8)Show QuestionPool For InstructorCourse:--------------
    --test
- exec ShowQuestionPoolForInstructorCourse 2,2
+ exec ShowQuestionPoolForInstructorCourse 1,2
 
- -----------------------------(8)Add Question To Exam Manually:--------------
-select * from Exam where ID = 19
+ -----------------------------(9)Add Question To Exam Manually:--------------
+
 exec AddQuestionToExamManually_Proc
+				1,
+				11,
 				2,
-				4,
-				4,
 				'TF',
 				10
    select * from ExamQuestion where Exam_ID = 2
    --delete from ExamQuestion
    select * from CourseExam
 
+-----------------------------(10)Add Question To Exam Random :--------------
+   --test
+select * from StudentExam where Exam_ID = 40
+ select * from ExamQuestion
+ delete from ExamQuestion
+exec GenerateRandomQuestionsCourseExam_Proc 
+	1,
+	2,
+	2,
+	2,
+	2,
+    '2024-1-15 14:30:00','2024-1-15 15:00:00',
+   0,
+   0,
+   1
+   select * from ExamQuestion
+   select * from Exam where ID = 19
+
+   -----------------------------(11)Show Question To Exam  :--------------
+--test
+exec ShowExamQuestions_Proc 1,14
+
+   -----------------------------(12)Add Grade To Question :--------------
+select * from ExamQuestion where Exam_ID = 14
+exec AddGradeToQuestion_Proc
+				1,
+				14,
+				5,
+				12
+select * from Exam where ID = 14
+ -----------------------------(13)Edit Grade To Question :--------------
+select * from ExamQuestion
+exec EditGradeOfQuestion_Proc
+				1,
+				14,
+				2,
+				13
+select * from Exam where ID = 18
+
+ -----------------------------(14)Delete Question  :--------------
+exec DeleteQuestion_Proc 1,14,5
+
+ -----------------------------(15)Remove Exam  from course  :--------------
+exec DeleteCourseExam_Proc 
+	1 ,
+	2 ,
+	14
+select * from Exam

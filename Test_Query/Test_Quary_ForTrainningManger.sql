@@ -213,3 +213,67 @@ EXEC GetExamsByDateRange @StartDate = '2024-01-01', @EndDate = '2024-01-31'
 ---------------(9)Get  Exams with Course Information:
 --test
 EXEC GetExamsWithCourseInfo
+
+---------------(10)Add Instruct for Course:--------------------
+SELECT * FROM InstructorCourse
+EXEC AddInstructorCourse @Instructor_ID = 2, @Course_ID = 4;
+
+EXEC AddInstructorCourse @Instructor_ID = 2, @Course_ID = 100;
+EXEC AddInstructorCourse  @Instructor_ID = 2, @Course_ID = 8;
+EXEC AddInstructorCourse  @Instructor_ID = 2, @Course_ID = 4;
+
+----------------------- (11)Update_Instractor_Course ------------------------
+
+select * from InstructorCourse
+EXEC UpdateInstructorCourse @Instructor_ID = 1, @Old_Course_ID = 1, @New_Course_ID = 3;
+
+EXEC UpdateInstructorCourse @Instructor_ID = 4, @Old_Course_ID = 1, @New_Course_ID = 3;
+EXEC UpdateInstructorCourse  @Instructor_ID = 2, @Old_Course_ID = 4, @New_Course_ID = 1;
+EXEC UpdateInstructorCourse  @Instructor_ID = 1, @Old_Course_ID = 1, @New_Course_ID = 3;
+----------------------- (12)Delete_Instractor_Course ------------------------
+select * from InstructorCourse
+EXEC DeleteInstructorCourse @Instructor_ID = 2, @Course_ID = 4;
+
+EXEC DeleteInstructorCourse @Instructor_ID = 4, @Course_ID = 1;
+EXEC DeleteInstructorCourse @Instructor_ID = 2, @Course_ID = 5;
+
+-------------------------------------(13)ADD_Instractor_Branch_Intake_Track---------------------------------
+select * from InstructorBelong
+EXEC AddInstructorBelong @Ins_ID = 4, @Intake_ID = 2, @Track_ID = 1, @Branch_ID = 1;
+
+EXEC AddInstructorBelong @Ins_ID = 7, @Intake_ID = 3, @Track_ID = 4, @Branch_ID = 8;
+
+EXEC AddInstructorBelong @Ins_ID = 4, @Intake_ID = 5, @Track_ID = 1, @Branch_ID = 1;
+
+EXEC AddInstructorBelong @Ins_ID = 4, @Intake_ID = 3, @Track_ID = 8, @Branch_ID = 1;
+
+EXEC AddInstructorBelong @Ins_ID = 4, @Intake_ID = 3, @Track_ID = 4, @Branch_ID = 8;
+
+-------------------------------------(14)Update_Instractor_Branch_Intake_Track---------------------------------
+select * from InstructorBelong
+EXEC UpdateInstractorBelong @Ins_ID = 2, @NewIntake_ID = 3, @NewTrack_ID = 3, @NewBranch_ID = 1;
+
+EXEC UpdateInstractorBelong @Ins_ID = 6, @NewIntake_ID = 2, @NewTrack_ID = 3, @NewBranch_ID = 4;
+
+
+-------------------------------------(15)Delete_Instractor_Branch_Intake_Track-----------------------------
+select * from InstructorBelong
+EXEC DeleteInstructorBelong @Ins_ID = 4;
+
+EXEC DeleteInstructorBelong @Ins_ID = 5;
+
+---------------------------(16)Add_Student_Branch_Intake_Track--------------
+SELECT * FROM StudentRegisteration 
+EXEC AddStudentRegistration  @Std_ID = 4, @Intake_ID = 2, @Track_ID = 1, @Branch_ID = 1;
+
+EXEC AddStudentRegistration @Std_ID = 1, @Intake_ID = 1, @Track_ID = 1, @Branch_ID = 1;
+EXEC AddStudentRegistration @Std_ID = 7, @Intake_ID = 1, @Track_ID = 2, @Branch_ID = 1;
+EXEC AddStudentRegistration @Std_ID = 4, @Intake_ID = 8, @Track_ID = 2, @Branch_ID = 1;
+EXEC AddStudentRegistration @Std_ID = 4, @Intake_ID = 1, @Track_ID = 8, @Branch_ID = 1;
+EXEC AddStudentRegistration @Std_ID = 4, @Intake_ID = 1, @Track_ID = 2, @Branch_ID = 8;
+---------------------------(17)Update_Student_Branch_Intake_Track--------------
+select * from StudentRegisteration
+EXEC UpdateStudentRegistration @Std_ID = 4, @NewIntake_ID = 2, @NewTrack_ID = 3, @NewBranch_ID = 1;
+---------------------------(18)Delete_Student_Branch_Intake_Track--------------
+select * from StudentRegisteration
+EXEC DeleteStudentRegistration @Std_ID = 4;

@@ -31,12 +31,9 @@ BEGIN
 
     SELECT 'Instructor assigned to course successfully.' AS ResultMessage;
 END
-SELECT * FROM InstructorCourse
-EXEC AddInstructorCourse @Instructor_ID = 2, @Course_ID = 4;
 
-EXEC AddInstructorCourse @Instructor_ID = 7, @Course_ID = 4;
-EXEC AddInstructorCourse  @Instructor_ID = 2, @Course_ID = 8;
-EXEC AddInstructorCourse  @Instructor_ID = 2, @Course_ID = 4;
+GO 
+
 ----------------------- Update_Instractor_Course ------------------------
 CREATE OR ALTER PROCEDURE UpdateInstructorCourse	
     @Instructor_ID INT,
@@ -99,12 +96,9 @@ BEGIN
     END
 END
 
-select * from InstructorCourse
-EXEC UpdateInstructorCourse @Instructor_ID = 1, @Old_Course_ID = 1, @New_Course_ID = 3;
+GO
 
-EXEC UpdateInstructorCourse @Instructor_ID = 4, @Old_Course_ID = 1, @New_Course_ID = 3;
-EXEC UpdateInstructorCourse  @Instructor_ID = 2, @Old_Course_ID = 4, @New_Course_ID = 1;
-EXEC UpdateInstructorCourse  @Instructor_ID = 1, @Old_Course_ID = 1, @New_Course_ID = 3;
+
 -------------------------------DELETE_Instractor_Course-----------------------
 CREATE OR ALTER PROCEDURE DeleteInstructorCourse	
     @Instructor_ID INT,
@@ -138,8 +132,4 @@ BEGIN
 
     SELECT 'Instructor course deleted successfully.' AS ResultMessage;
 END
-select * from InstructorCourse
-EXEC DeleteInstructorCourse @Instructor_ID = 2, @Course_ID = 1;
-
-EXEC DeleteInstructorCourse @Instructor_ID = 4, @Course_ID = 1;
-EXEC DeleteInstructorCourse @Instructor_ID = 2, @Course_ID = 5;
+GO

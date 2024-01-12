@@ -106,22 +106,9 @@ begin
 			where sc.Course_ID = @Course_ID and ce.Exam_ID = @NewExam_ID
 			SELECT cast(@NewExam_ID as varchar(max)) + ' is the Exam number you can use to specify each Question Grade' AS ResultMessage 
 end
---test
-select * from StudentExam where Exam_ID = 40
- select * from ExamQuestion
- delete from ExamQuestion
-exec GenerateRandomQuestionsCourseExam_Proc 
-	1,
-	1,
-	2,
-	2,
-	2,
-    '2024-1-15 14:30:00','2024-1-15 15:00:00',
-   0,
-   0,
-   1
-   select * from ExamQuestion
-   select * from Exam where ID = 19
+
+GO
+
 --2- Displaying the auto generated exam questions to assign a degree to each of them
 create or alter proc ShowExamQuestions_Proc
 		@Instructor_ID int,
@@ -219,8 +206,9 @@ IF @Instructor_ID <= 0 or @Exam_ID <= 0 or @Instructor_ID is null or @Exam_ID is
 			CorrectAnswer 'Correct Answer' from #tmpExamQuestions
 end
 
---test
-exec ShowExamQuestions_Proc 2,32
+GO
+
+
 
 --3-Assign grade for each question of the exam
 create or alter proc AddGradeToQuestion_Proc
@@ -304,10 +292,4 @@ begin
 				where ID = @Exam_ID
 				select 'Grade Added!' as ResultMessage
 end
-select * from ExamQuestion where Exam_ID = 32
-exec AddGradeToQuestion_Proc
-				1,
-				32,
-				4,
-				20
-select * from Exam where ID = 32
+GO

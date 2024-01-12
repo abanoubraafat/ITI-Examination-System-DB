@@ -48,16 +48,8 @@ BEGIN
 	        RETURN;
     END
 	END
-select * from InstructorBelong
-EXEC AddInstructorBelong @Ins_ID = 4, @Intake_ID = 1, @Track_ID = 1, @Branch_ID = 1;
+	GO
 
-EXEC AddInstructorBelong @Ins_ID = 7, @Intake_ID = 3, @Track_ID = 4, @Branch_ID = 8;
-
-EXEC AddInstructorBelong @Ins_ID = 4, @Intake_ID = 5, @Track_ID = 1, @Branch_ID = 1;
-
-EXEC AddInstructorBelong @Ins_ID = 4, @Intake_ID = 3, @Track_ID = 8, @Branch_ID = 1;
-
-EXEC AddInstructorBelong @Ins_ID = 4, @Intake_ID = 3, @Track_ID = 4, @Branch_ID = 8;
 
 -------------------------------------Update_Instractor_Branch_Intake_Track------------------------------------------
 CREATE OR ALTER PROCEDURE UpdateInstractorBelong
@@ -84,11 +76,7 @@ BEGIN
     SELECT 'Instractor Info updated successfully.' AS ResultMessage;
 END
 
-select * from InstructorBelong
-EXEC UpdateInstractorBelong @Ins_ID = 1, @NewIntake_ID = 2, @NewTrack_ID = 3, @NewBranch_ID = 4;
-
-EXEC UpdateInstractorBelong @Ins_ID = 6, @NewIntake_ID = 2, @NewTrack_ID = 3, @NewBranch_ID = 4;
-
+Go
 
 -------------------------------------Delete_Instractor_Branch_Intake_Track------------------------------
 CREATE OR ALTER PROCEDURE DeleteInstructorBelong
@@ -108,9 +96,6 @@ BEGIN
 
     SELECT 'Instructor Belong deleted successfully.' AS ResultMessage;
 END
-select * from InstructorBelong
-EXEC DeleteInstructorBelong @Ins_ID = 4;
-
-EXEC DeleteInstructorBelong @Ins_ID = 5;
+GO
 
 

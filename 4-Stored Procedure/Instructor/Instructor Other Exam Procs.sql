@@ -85,13 +85,8 @@ begin
 				where ID = @Exam_ID
 				select 'Grade Updated Succefully!' as ResultMessage
 end
-select * from ExamQuestion
-exec EditGradeOfQuestion_Proc
-				2,
-				18,
-				1,
-				10
-select * from Exam where ID = 18
+GO
+
 ------------------------------------------------------------------------
 --delete question
 
@@ -166,13 +161,7 @@ begin
 	select 'Question deleted Succefully!' as ResultMessage
 end
 
-exec DeleteQuestion_Proc
-				2,
-				18,
-				3
-select * from ExamQuestion
-where Exam_ID = 18 and Question_ID = 2
-select * from Exam where ID = 18
+GO
 --------------------------------------------------------------------------------------------
 --Delete Exam --Alpha
 create or alter proc DeleteCourseExam_Proc 
@@ -228,7 +217,5 @@ begin
 	delete from Exam where ID = @Exam_ID
 end
 
-exec DeleteCourseExam_Proc 
-	1 ,
-	1 ,
-	1
+GO
+
