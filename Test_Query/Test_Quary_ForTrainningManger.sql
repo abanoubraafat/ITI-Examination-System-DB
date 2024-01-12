@@ -277,3 +277,9 @@ EXEC UpdateStudentRegistration @Std_ID = 4, @NewIntake_ID = 2, @NewTrack_ID = 3,
 ---------------------------(18)Delete_Student_Branch_Intake_Track--------------
 select * from StudentRegisteration
 EXEC DeleteStudentRegistration @Std_ID = 4;
+
+--------------------------(19) Show Info by TrainingManger_ID--------------------------
+EXEC ManagerTrackBranchIntake_proc  1
+
+-------------------------- (20) Show Intake In this Branch--------------------------
+EXEC show_BranchIntake_proc  'asyut' 

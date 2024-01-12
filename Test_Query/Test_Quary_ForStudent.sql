@@ -25,3 +25,12 @@ exec StudentAnswerExam_Proc
 			@Exam_ID = 38,
 			@Question_ID = 3,
 			@Student_Question_Answer = 'a'
+
+--------------------------(5) Show Course by Student_ID--------------------------
+--test
+EXEC studentcourses_proc  2
+
+--------------------------(6) Show Tracks in this Branch --------------------------
+EXEC show_BranchTrack_proc  'asyut' 
+
+
