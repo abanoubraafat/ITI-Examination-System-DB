@@ -308,3 +308,9 @@ select * from  show_Istructor_view
 select * from  show_Cources_view
 -------------------------- (32) Show Training Manager --------------------------
 select * from  show_TrainingManager_view
+--------------------------(33) CourseTrackBranchIntake By Exam_ID  --------------------------
+EXEC CourseTrackBranchIntake_proC 3
+------------------------------------(33)Show All Exams---------------------
+select * from show_Exam_view
+------------------------------------(12)Show All Question---------------------
+select * from  show_Question_view

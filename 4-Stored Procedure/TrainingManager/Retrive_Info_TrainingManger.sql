@@ -57,7 +57,7 @@ end
 		on ib.Track_ID = t.ID
 		where b.[Name] =@Branch_Name
 end
-
+GO
 --------------------------(4) Show Branch Students --------------------------
 create or alter proc ShowBranchStudents_Proc @Branch_Name nvarchar(max)
 as begin
@@ -83,6 +83,7 @@ begin
 	where b.[Name] = @Branch_Name
 end
 end
+GO
 --------------------------(5) Show Branch Instructors --------------------------
 create or alter proc ShowBranchInstructors_Proc @Branch_Name nvarchar(max)
 as begin
@@ -108,7 +109,7 @@ begin
 	where b.[Name] = @Branch_Name
 end
 end
-
+GO
 --------------------------(6) Show Track Students --------------------------
 create or alter proc ShowTrackStudents_Proc @Track_Name nvarchar(max)
 as begin
@@ -134,6 +135,7 @@ begin
 	where t.[Name] = @Track_Name
 end
 end
+GO
 --------------------------(7) Show Track Instructors --------------------------
 create or alter proc ShowTrackInstrucors_Proc @Track_Name nvarchar(max)
 as begin
@@ -160,7 +162,7 @@ begin
 end
 end
 
-
+GO
 --------------------------(8) Show Students in specific Branch Intake Track --------------------------
 create or alter proc ShowStudentsInSpecificBranchIntakeTrack_Proc @Branch_Name nvarchar(max), @Intake_Name nvarchar(max), @Track_Name nvarchar(max)
 as begin
@@ -199,6 +201,7 @@ begin
 	where b.[Name] = @Branch_Name and t.[Name] = @Track_Name and i.[Name] = @Intake_Name
 end
 end
+GO
 --------------------------(9)  Show Instructors in specific Branch Intake Track --------------------------
 create or alter proc ShowInstructorsInSpecificBranchIntakeTrack_Proc @Branch_Name nvarchar(max), @Intake_Name nvarchar(max), @Track_Name nvarchar(max)
 as begin
@@ -237,3 +240,47 @@ begin
 	where b.[Name] = @Branch_Name and t.[Name] = @Track_Name and i.[Name] = @Intake_Name
 end
 end
+GO
+--------------------------(10) CourseTrackBranchIntake By Exam_ID  --------------------------
+CREATE OR ALTER PROCEDURE CourseTrackBranchIntake_proC (@examID INT)
+AS
+BEGIN
+    IF NOT EXISTS (SELECT ID FROM Exam WHERE ID = @examID)
+    BEGIN
+        SELECT 'Exam ID you have entered does not exist'
+    END
+    ELSE
+    BEGIN
+        SELECT C.Name AS 'Course Name', T.Name AS 'Track Name', B.Name AS 'Branch Name', I.Name AS 'Intake Name'
+        FROM Course C
+        INNER JOIN CourseExam CE ON C.ID = CE.Course_ID
+        INNER JOIN Exam E ON E.ID = CE.Exam_ID
+        INNER JOIN InstructorCourse IC ON C.ID = IC.Course_ID
+        INNER JOIN Instructor INS ON IC.Instructor_ID = INS.ID
+        INNER JOIN InstructorBelong IB ON INS.ID = IB.Ins_ID
+        INNER JOIN Track T ON IB.Track_ID = T.ID
+        INNER JOIN Intake I ON IB.Intake_ID = I.ID
+        INNER JOIN Branch B ON IB.Branch_ID = B.ID
+        WHERE E.ID = @examID
+    END
+END
+GO
+------------------------------------(11)Show All Exams---------------------
+create OR ALTER view show_Exam_view
+as
+select NumberOfQuestions,StartTime,EndTime,TotalTime,Corrective,Normal
+from Exam 
+
+GO
+------------------------------------(12)Show All Question---------------------
+create OR ALTER view show_Question_view
+as
+select Text_Questions,Correct_Answer_Text_Questions,True_or_False_Questions,Correct_Answer_True_or_False,Choose_An_Answer_Question,Correct_Answer_Choose_Question
+from Question
+GO
+
+
+
+
+
+

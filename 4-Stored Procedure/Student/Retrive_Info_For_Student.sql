@@ -28,4 +28,21 @@ WHERE  S.Branch_ID=B.ID  AND S.Track_ID=T.ID
 AND B.Name=@branch_name
 END
 GO
+--------------------------(3) Show Course in this Track --------------------------
+CREATE OR ALTER PROCEDURE show_TrackCourses_proc (@track_name nvarchar(50))
+AS
+BEGIN
+    IF NOT EXISTS (SELECT Name FROM Track WHERE Name = @track_name)
+    BEGIN
+        SELECT 'Track Name does not exist'
+    END
+    ELSE
+    BEGIN
+        SELECT T.Name AS 'Track Name', C.Name AS 'Course Name'
+        FROM Track T
+        INNER JOIN StudentRegisteration S ON S.Track_ID = T.ID
+        INNER JOIN Course C ON S.Std_ID = C.ID
+        WHERE T.Name = @track_name
+    END
+END
 
