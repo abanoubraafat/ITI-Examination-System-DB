@@ -32,5 +32,15 @@ EXEC studentcourses_proc  2
 
 --------------------------(6) Show Tracks in this Branch --------------------------
 EXEC show_BranchTrack_proc  'asyut' 
+--------------------------(7) Show Exam Results for a student --------------------------
 
+SELECT * FROM ExamResultsView WHERE Std_ID = 1 AND Exam_ID = 5;
 
+--------------------------(7) Show track branch intake --------------------------
+select * from track_branch_intack_view
+--------------------------(8) Show All Branches --------------------------
+select * from   show_Branch_view
+--------------------------(9) Show All Tracks --------------------------
+select * from  show_Track_view 
+--------------------------(10) Show All Intakes --------------------------
+select * from  show_Intake_view 

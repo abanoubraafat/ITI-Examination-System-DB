@@ -123,5 +123,8 @@ exec DeleteCourseExam_Proc
 	14
 select * from Exam
 --------------------------(16) Show Course TEACH by Instractor_ID--------------------------
---test
+
 Exec instrucrorscourses_PROC  1
+--------------------------(17) Show Instructors Courses--------------------------
+
+select * from show_instrucrors_courses_view  

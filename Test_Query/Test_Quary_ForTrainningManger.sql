@@ -283,3 +283,14 @@ EXEC ManagerTrackBranchIntake_proc  1
 
 -------------------------- (20) Show Intake In this Branch--------------------------
 EXEC show_BranchIntake_proc  'asyut' 
+-------------------------- (21) Show Training Manager Info --------------------------
+
+select * from show_TrainingManagerInfo_view 
+-------------------------- (22) Show All Student --------------------------
+select * from  show_Student_view
+-------------------------- (23) Show All Instructors --------------------------
+select * from  show_Istructor_view
+-------------------------- (24) Show All Courses --------------------------
+select * from  show_Cources_view
+-------------------------- (25) Show Training Manager --------------------------
+select * from  show_TrainingManager_view

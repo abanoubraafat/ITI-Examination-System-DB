@@ -31,7 +31,7 @@ grant execute on object :: [dbo].[GetExamsWithCourseInfo] to manager
 grant execute on object :: [dbo].[ManagerTrackBranchIntake_proc] to manager
 grant execute on object :: [dbo].[show_BranchTrack_proc] to manager
 grant execute on object :: [dbo].[show_BranchIntake_proc] to manager
-grant execute on object :: [dbo].[show_TrackCourses_proc] to manager, instructor, student
+--grant execute on object :: [dbo].[show_TrackCourses_proc] to manager, instructor, student
 
 
 grant execute on object :: [dbo].[AddTracks] to manager
@@ -46,9 +46,9 @@ grant execute on object :: [dbo].[DeleteBranch] to manager
 --Views--
 
 grant select on object :: [dbo].[ExamResultsView] to manager
-grant select on object :: [dbo].[GetStudentDetails_view] to manager
-grant select on object :: [dbo].[GetInsractorDetails_view] to manager
-grant select on object :: [dbo].[track_branch_intack_view] to manager
+--grant select on object :: [dbo].[GetStudentDetails_view] to manager
+--grant select on object :: [dbo].[GetInsractorDetails_view] to manager
+grant select on object :: [dbo].[track_branch_intack_view] to manager, student
 grant select on object :: [dbo].[show_instrucrors_courseS_view] to manager
 grant select on object :: [dbo].[show_TrainingManagerInfo_view] to manager
 grant select on object :: [dbo].[show_StudentAnswerQuestion_view] to manager
@@ -59,9 +59,9 @@ grant select on object :: [dbo].[show_Exam_view] to manager
 grant select on object :: [dbo].[show_Question_view] to manager
 grant select on object :: [dbo].[show_StudentExamQuestions_view] to manager
 grant select on object :: [dbo].[show_TrainingManager_view] to manager
-grant select on object :: [dbo].[show_Track_view] to manager
-grant select on object :: [dbo].[show_Branch_view] to manager
-grant select on object :: [dbo].[show_Intake_view] to manager
+grant select on object :: [dbo].[show_Track_view] to manager, student
+grant select on object :: [dbo].[show_Branch_view] to manager, student
+grant select on object :: [dbo].[show_Intake_view] to manager, student
 
 
 

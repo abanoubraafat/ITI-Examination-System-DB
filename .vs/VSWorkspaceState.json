@@ -1,12 +1,11 @@
 {
   "ExpandedNodes": [
     "",
-    "\\3-Data Inserting",
     "\\4-Stored Procedure",
-    "\\4-Stored Procedure\\TrainingManager",
-    "\\4-Stored Procedure\\TrainingManager\\Branch",
+    "\\6-Users & Permissions",
+    "\\9- Views",
     "\\Test_Query"
   ],
-  "SelectedNode": "\\Test_Query\\Test_Quary_ForTrainningManger.sql",
+  "SelectedNode": "\\README.md",
   "PreviewInSolutionExplorer": false
 }
