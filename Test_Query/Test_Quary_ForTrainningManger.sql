@@ -283,14 +283,28 @@ EXEC ManagerTrackBranchIntake_proc  1
 
 -------------------------- (20) Show Intake In this Branch--------------------------
 EXEC show_BranchIntake_proc  'asyut' 
--------------------------- (21) Show Training Manager Info --------------------------
+--------------------------(21) Show Intakes, tracks In this Branch --------------------------
+exec ShowBranch_IntakesAndTracks_Proc 'Minia'
+--------------------------(22) Show Branch Students --------------------------
+exec ShowBranchStudents_Proc 'Minia'
+--------------------------(23) Show Branch Instructors --------------------------
+exec ShowBranchInstructors_Proc 'Minia'
+--------------------------(24) Show Track Students --------------------------
+exec ShowTrackStudents_Proc 'Full stack web developer using Python'
+--------------------------(25) Show Track Students --------------------------
+exec ShowTrackInstrucors_Proc 'Full stack web developer using MEARN'
+--------------------------(26) Show Students in specific Branch Intake Track --------------------------
+exec ShowStudentsInSpecificBranchIntakeTrack_Proc @Branch_Name = 'Minia', @Intake_Name = 'intake 41' ,@Track_Name = 'Full stack web developer using .NET'
+--------------------------(27)  Show Instructors in specific Branch Intake Track --------------------------
+exec ShowInstructorsInSpecificBranchIntakeTrack_Proc @Branch_Name = 'Minia', @Intake_Name = 'intake 41' ,@Track_Name = 'Full stack web developer using .NET'
+-------------------------- (28) Show Training Manager Info --------------------------
 
 select * from show_TrainingManagerInfo_view 
--------------------------- (22) Show All Student --------------------------
+-------------------------- (29) Show All Student --------------------------
 select * from  show_Student_view
--------------------------- (23) Show All Instructors --------------------------
+-------------------------- (30) Show All Instructors --------------------------
 select * from  show_Istructor_view
--------------------------- (24) Show All Courses --------------------------
+-------------------------- (31) Show All Courses --------------------------
 select * from  show_Cources_view
--------------------------- (25) Show Training Manager --------------------------
+-------------------------- (32) Show Training Manager --------------------------
 select * from  show_TrainingManager_view

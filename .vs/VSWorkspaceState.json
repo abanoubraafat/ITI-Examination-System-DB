@@ -1,7 +1,11 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\4-Stored Procedure",
+    "\\4-Stored Procedure\\TrainingManager",
+    "\\6-Users & Permissions",
+    "\\Test_Query"
   ],
-  "SelectedNode": "\\7-Index",
+  "SelectedNode": "\\4-Stored Procedure\\TrainingManager\\Retrive_Info_TrainingManger.sql",
   "PreviewInSolutionExplorer": false
 }

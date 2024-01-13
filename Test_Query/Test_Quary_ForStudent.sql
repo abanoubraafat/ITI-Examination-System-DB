@@ -1,10 +1,10 @@
 ------------------------(1)Get Total Degree For Student-----------------
 select * from StudentExamQuestions
-EXEC CorrectExamForStudent 1, 5
-EXEC GetTotalDegreeForStudentExam 1, 5
+EXEC CorrectExamForStudent @std_id = 1, @exam_id = 5
+EXEC GetTotalDegreeForStudentExam @student_id = 1, @exam_id = 5
 
 --------------------------(2) Show Student Course Exams--------------------------
-exec ShowStudentCourseExams_Proc  2,2
+exec ShowStudentCourseExams_Proc  @Student_ID = 2, @Course_ID = 2
 
 --------------------------(3) Take And Show Exam On Specific Time--------------------------
 EXEC TakeAndShowExamOnSpecificTime @std_id = 1, @exam_id = 6;

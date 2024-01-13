@@ -31,8 +31,13 @@ grant execute on object :: [dbo].[GetExamsWithCourseInfo] to manager
 grant execute on object :: [dbo].[ManagerTrackBranchIntake_proc] to manager
 grant execute on object :: [dbo].[show_BranchTrack_proc] to manager
 grant execute on object :: [dbo].[show_BranchIntake_proc] to manager
---grant execute on object :: [dbo].[show_TrackCourses_proc] to manager, instructor, student
-
+grant execute on object :: [dbo].[ShowBranch_IntakesAndTracks_Proc] to manager
+grant execute on object :: [dbo].[ShowBranchStudents_Proc] to manager
+grant execute on object :: [dbo].[ShowBranchInstructors_Proc] to manager
+grant execute on object :: [dbo].[ShowTrackStudents_Proc] to manager
+grant execute on object :: [dbo].[ShowTrackInstrucors_Proc] to manager
+grant execute on object :: [dbo].[ShowStudentsInSpecificBranchIntakeTrack_Proc] to manager
+grant execute on object :: [dbo].[ShowInstructorsInSpecificBranchIntakeTrack_Proc] to manager
 
 grant execute on object :: [dbo].[AddTracks] to manager
 grant execute on object :: [dbo].[UpdateTrackNames] to manager
