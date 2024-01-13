@@ -8,7 +8,6 @@ Use ITIExaminationSystem
 CREATE USER itiadmin 
 FOR LOGIN itiadmin
 GO
-GRANT ALTER, CREATE, DROP, SELECT, INSERT, UPDATE, DELETE ON DATABASE::ITIExaminationSystem TO itiadmin;
 
 --Training Manager Account--
 

@@ -1,6 +1,6 @@
---Not Added yet
---retrieve some info, add update files in Stored Procedures/Exam 
---Views
+--Admin Permissions--
+GRANT ALTER ON DATABASE :: ITIExaminationSystem TO itiadmin;
+GRANT SELECT, INSERT, UPDATE, DELETE, Execute ON DATABASE :: ITIExaminationSystem TO itiadmin;
 
 --Training Manager Permissions--
 --Procedures--
@@ -38,6 +38,9 @@ grant execute on object :: [dbo].[ShowTrackStudents_Proc] to manager
 grant execute on object :: [dbo].[ShowTrackInstrucors_Proc] to manager
 grant execute on object :: [dbo].[ShowStudentsInSpecificBranchIntakeTrack_Proc] to manager
 grant execute on object :: [dbo].[ShowInstructorsInSpecificBranchIntakeTrack_Proc] to manager
+grant execute on object :: [dbo].[show_TrackCourses_proc] to manager, student
+grant execute on object :: [dbo].[CourseTrackBranchIntake_proC] to manager
+
 
 grant execute on object :: [dbo].[AddTracks] to manager
 grant execute on object :: [dbo].[UpdateTrackNames] to manager
@@ -67,7 +70,8 @@ grant select on object :: [dbo].[show_TrainingManager_view] to manager
 grant select on object :: [dbo].[show_Track_view] to manager, student
 grant select on object :: [dbo].[show_Branch_view] to manager, student
 grant select on object :: [dbo].[show_Intake_view] to manager, student
-
+grant select on object :: [dbo].[show_Exam_view] to manager
+grant select on object :: [dbo].[show_Question_view] to manager
 
 
 --------------------------------------------------------------------------------------
