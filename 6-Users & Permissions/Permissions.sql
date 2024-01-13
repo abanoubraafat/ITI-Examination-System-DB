@@ -54,18 +54,14 @@ grant execute on object :: [dbo].[DeleteBranch] to manager
 --Views--
 
 grant select on object :: [dbo].[ExamResultsView] to manager
---grant select on object :: [dbo].[GetStudentDetails_view] to manager
---grant select on object :: [dbo].[GetInsractorDetails_view] to manager
 grant select on object :: [dbo].[track_branch_intack_view] to manager, student
 grant select on object :: [dbo].[show_instrucrors_courseS_view] to manager
 grant select on object :: [dbo].[show_TrainingManagerInfo_view] to manager
-grant select on object :: [dbo].[show_StudentAnswerQuestion_view] to manager
 grant select on object :: [dbo].[show_Student_view] to manager
 grant select on object :: [dbo].[show_Istructor_view] to manager
 grant select on object :: [dbo].[show_Cources_view] to manager
 grant select on object :: [dbo].[show_Exam_view] to manager
 grant select on object :: [dbo].[show_Question_view] to manager
-grant select on object :: [dbo].[show_StudentExamQuestions_view] to manager
 grant select on object :: [dbo].[show_TrainingManager_view] to manager
 grant select on object :: [dbo].[show_Track_view] to manager, student
 grant select on object :: [dbo].[show_Branch_view] to manager, student
@@ -95,9 +91,8 @@ grant execute on object :: [dbo].[DeleteExam] to instructor
 grant execute on object :: [dbo].[instrucrorscourses_PROC] to instructor
 grant execute on object :: [dbo].[GetExamsByCourse] to instructor
 grant execute on object :: [dbo].[GetExamDetailsWithCourseInfo] to instructor
-grant execute on object :: [dbo].[GetDetailedExamInfo] to instructor
 
---Views-- 
+ 
 
 ---------------------------------------------------------------------------------------
 
@@ -106,4 +101,4 @@ grant execute on object :: [dbo].[GetDetailedExamInfo] to instructor
 grant exec on object :: [dbo].[ShowStudentCourseExams_Proc] to student
 grant exec on object :: [dbo].[studentcourses_proc] to student
 grant exec on object :: [dbo].[TakeAndShowExamOnSpecificTime] to student
---Views--
+

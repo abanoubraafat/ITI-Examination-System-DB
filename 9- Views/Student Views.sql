@@ -35,15 +35,16 @@ create OR ALTER view show_Branch_view
 as
 select Name 
 from Branch
-
+Go
 --------------------------(4) Show All Trackes  --------------------------
 create OR ALTER view show_Track_view
 as
 select  Name
 from Track
-
+GO
 --------------------------(5) Show All Intakes  --------------------------
 create OR ALTER view show_Intake_view
 as
 select Name
 from Intake
+GO
