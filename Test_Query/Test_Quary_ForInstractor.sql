@@ -5,10 +5,10 @@ EXEC GetExamDetails @ExamID = 1
 
 -- Update Exam
 EXEC UpdateExam 
-    @ExamID = 1,
+    @ExamID = 15,
     @NumberOfQuestions = 25,
-    @StartTime = '2024-01-08',
-    @EndTime = '2024-01-08',
+    @StartTime = '2024-01-15',
+    @EndTime = '2024-01-15',
     @TotalDegree = 25,
     @Corrective = 0,
     @Normal = 1,
@@ -18,11 +18,11 @@ EXEC GetExamDetails @ExamID = 1
 
 ---Delete 
 --test
-EXEC DeleteExam @ExamID = 1
+EXEC DeleteExam @ExamID = 15
 EXEC GetExamDetails  @ExamID = 1
 
 ---------------------------------(2)Correct Exam For Student --------------
-EXEC CorrectExamForStudent @std_id = 1, @exam_id = 5
+EXEC CorrectExamForStudent @std_id = 1, @exam_id = 1
 
 select * from StudentExamQuestions
 where Std_ID=1 and Exam_ID=5
@@ -37,15 +37,15 @@ EXEC GetExamDetailsWithCourseInfo @ExamID = 1
 
 -----------------------------(5)Assign Exam To Student:--------------
 exec AssignExamToStudent
-			@Instructor_ID = 2,
-			@Exam_ID = 2,
+			@Instructor_ID = 1,
+			@Exam_ID = 5,
 			@Student_ID = 1
 
 -----------------------------(6)Delete Exam To Student:--------------
 
 exec DeleteAssignedStudentExam 
-			@Instructor_ID = 2,
-			@Exam_ID = 2,
+			@Instructor_ID = 1,
+			@Exam_ID = 5,
 			@Student_ID = 1
 select * from StudentExam
 
@@ -53,10 +53,10 @@ select * from StudentExam
 --test
 
 exec SetManualQuestionsCourseExam_Proc 
-	 @Instructor_ID = 2,
+	 @Instructor_ID = 1,
 	 @Course_ID = 2,
-     @StartTime = '2024-1-13 14:30:00',
-	 @EndTime = '2024-1-14 15:00:00',
+     @StartTime = '2024-1-15 14:30:00',
+	 @EndTime = '2024-1-15 18:00:00',
      @Corrective = 0,
      @Normal = 1
 
@@ -69,7 +69,7 @@ select * from Exam
 
 exec AddQuestionToExamManually_Proc
 				@Instructor_ID = 1,
-				@Exam_ID = 11,
+				@Exam_ID = 5,
 				@Question_ID = 2,
 				@Question_Type = 'TF',
 				@Question_Grade = 10
@@ -104,7 +104,7 @@ exec ShowExamQuestions_Proc @Instructor_ID = 1, @Exam_ID = 14
 select * from ExamQuestion where Exam_ID = 14
 exec AddGradeToQuestion_Proc
 				@Instructor_ID = 1,
-				@Exam_ID = 14,
+				@Exam_ID = 16,
 				@Question_ID = 5,
 				@Question_Grade = 12
 select * from Exam where ID = 14
@@ -112,8 +112,8 @@ select * from Exam where ID = 14
 select * from ExamQuestion
 exec EditGradeOfQuestion_Proc
 				@Instructor_ID = 1,
-				@Exam_ID = 14,
-				@Question_ID = 2,
+				@Exam_ID = 16,
+				@Question_ID = 5,
 				@Question_Grade = 13
 
 select * from Exam where ID = 18
@@ -124,7 +124,7 @@ exec DeleteQuestion_Proc @Instructor_ID = 1, @Exam_ID = 14, @Question_ID = 5
  -----------------------------(15)Remove Exam  from course  :--------------
 exec DeleteCourseExam_Proc 
 	@Instructor_ID = 1 ,
-	@Course_ID = 2 ,
+	@Course_ID = 3 ,
 	@Exam_ID = 14
 select * from Exam
 --------------------------(16) Show Course TEACH by Instractor_ID--------------------------

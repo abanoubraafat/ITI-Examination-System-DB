@@ -1,18 +1,18 @@
 ------------------------(1)Get Total Degree For Student-----------------
 select * from StudentExamQuestions
-EXEC CorrectExamForStudent @std_id = 1, @exam_id = 5
-EXEC GetTotalDegreeForStudentExam @student_id = 1, @exam_id = 5
+EXEC CorrectExamForStudent @std_id = 1, @exam_id = 1
+EXEC GetTotalDegreeForStudentExam @student_id = 1, @exam_id = 1
 
 --------------------------(2) Show Student Course Exams--------------------------
 exec ShowStudentCourseExams_Proc  @Student_ID = 2, @Course_ID = 2
 
 --------------------------(3) Take And Show Exam On Specific Time--------------------------
-EXEC TakeAndShowExamOnSpecificTime @std_id = 1, @exam_id = 6;
+EXEC TakeAndShowExamOnSpecificTime @std_id = 1, @exam_id = 4;
 
 --------------------------(4) Student Answer Exam--------------------------
 exec StudentAnswerExam_Proc
-			@Student_ID = 2,
-			@Exam_ID = 6,
+			@Student_ID = 1,
+			@Exam_ID = 5,
 			@Question_ID = 1,
 			@Student_Question_Answer = 'c'
 exec StudentAnswerExam_Proc
@@ -45,4 +45,4 @@ select * from  show_Track_view
 --------------------------(10) Show All Intakes --------------------------
 select * from  show_Intake_view 
 --------------------------(11) Show Course in this Track --------------------------
-EXEC show_TrackCourses_proc 'Full stack web developer using MEaRN'
+EXEC show_TrackCourses_proc 'Full stack web developer using MEARN'

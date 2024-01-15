@@ -55,6 +55,11 @@ begin
 			SELECT 'course id or instructor id or both are wrong' AS ResultMessage
 			Return;
 		end
+		else if (select count(*) from Question where Course_Id = @Course_ID) < (@MCQ_No + @TF_No + @TextQ_No)
+		begin
+			SELECT 'Not Enough Questions in question pool.' AS ResultMessage
+			RETURN
+		end
 			declare @NewExam_ID int 
 			SELECT TOP 1 @NewExam_ID = ID + 1 FROM Exam ORDER BY ID DESC --get the last exam id and increments it by 1 as the new exam id
 			--select @NewExam_ID
@@ -136,6 +141,15 @@ IF @Instructor_ID <= 0 or @Exam_ID <= 0 or @Instructor_ID is null or @Exam_ID is
 		where ce.Exam_ID = @Exam_ID and ic.Instructor_ID = @Instructor_ID) 
 		begin
 			SELECT 'Exam not found' AS ResultMessage
+			RETURN
+		end
+		else if not exists 
+		(select  1 FROM ExamQuestion eq
+			INNER JOIN Question q ON eq.Question_ID = q.Questions_ID
+			WHERE eq.Exam_ID = @Exam_ID
+		)
+		begin
+			SELECT 'No Question were found for that Exam' AS ResultMessage
 			RETURN
 		end
 		 CREATE TABLE #tmpExamQuestions(

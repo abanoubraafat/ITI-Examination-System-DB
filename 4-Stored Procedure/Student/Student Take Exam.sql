@@ -195,29 +195,29 @@ begin
 	end
 	IF NOT EXISTS (SELECT 1 FROM [dbo].[StudentExam] WHERE [Student_ID] = @Student_ID AND [Exam_ID]=@Exam_ID )
     BEGIN
-        SELECT 'You are not access in this exam' AS ResultMessage
+        SELECT 'You can not access in this exam' AS ResultMessage
         RETURN
     END
-    ---- Check if the exam is currently available
-    --DECLARE @currentDateTime DATETIME = GETDATE()
-    --DECLARE @examStartTime DATETIME
-    --DECLARE @examEndTime DATETIME
+    -- Check if the exam is currently available
+    DECLARE @currentDateTime DATETIME = GETDATE()
+    DECLARE @examStartTime DATETIME
+    DECLARE @examEndTime DATETIME
 
-    --SELECT @examStartTime = StartTime, @examEndTime = EndTime
-    --FROM Exam
-    --WHERE ID = @exam_id
+    SELECT @examStartTime = StartTime, @examEndTime = EndTime
+    FROM Exam
+    WHERE ID = @exam_id
 
-    --IF @currentDateTime < @examStartTime
-    --BEGIN
-    --    SELECT 'The exam has not started yet. Please wait for the scheduled start time.' AS ResultMessage
-    --    RETURN
-    --END
+    IF @currentDateTime < @examStartTime
+    BEGIN
+        SELECT 'The exam has not started yet. Please wait for the scheduled start time.' AS ResultMessage
+        RETURN
+    END
 
-    --IF @currentDateTime > @examEndTime
-    --BEGIN
-    --    SELECT 'The exam has already ended. You cannot take the exam now.' AS ResultMessage
-    --    RETURN
-    --END
+    IF @currentDateTime > @examEndTime
+    BEGIN
+        SELECT 'The exam has already ended. You cannot take the exam now.' AS ResultMessage
+        RETURN
+    END
 	 IF EXISTS (SELECT 1 FROM StudentExamQuestions WHERE Std_ID = @Student_ID AND Exam_ID = @Exam_ID and Questions_Id = @Question_ID)
     BEGIN
         SELECT 'You have already answered this question' AS ResultMessage
